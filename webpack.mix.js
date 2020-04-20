@@ -11,5 +11,20 @@ const mix = require('laravel-mix');
  |
  */
 
+mix.extend('addWebpackLoaders', (webpackConfig, loaderRules) => {
+    loaderRules.forEach((loaderRule) => {
+        webpackConfig.module.rules.push(loaderRule);
+    });
+});
+
+mix.addWebpackLoaders([
+    {
+        test: /\.(ogg|mp3|wav|mpe?g)$/,
+        use: [
+            'file-loader',
+        ],
+    },
+]);
+
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
