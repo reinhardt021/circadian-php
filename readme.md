@@ -7,19 +7,14 @@ Interval Training app
 
 ```
 $ vagrant ssh
-
-
-cd my project
+$ cd my project
 
 $ mysql
-
-show databases;
-use database-name;
-show tables;
-
-CREATE database circadian;
-
-exit
+> show databases;
+> use database-name;
+> show tables;
+> CREATE database circadian;
+> exit
 
 # then update the .env file with the database credentials
 
