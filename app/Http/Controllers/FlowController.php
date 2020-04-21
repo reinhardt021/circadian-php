@@ -14,10 +14,12 @@ class FlowController extends Controller
         ]);
     }
 
-    public function store()
+    public function store(Request $request)
     {
+        $title = $request->input('title');
+
         return response()->json([
-            'data' => 'hit store routes',
+            'data' => "hit store route with new title $title",
         ]);
     }
 
