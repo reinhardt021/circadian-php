@@ -17,6 +17,7 @@ $ mysql
 > exit
 
 # then update the .env file with the database credentials
+# this is essential part
 
 $ php artisan migrate once the database is created
 
