@@ -63,9 +63,9 @@
         }
     </style>
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <script src='https://use.fontawesome.com/releases/v5.3.1/js/all.js' defer></script>
 </head>
 <body>
-<div class="flex-center position-ref full-height">
     @if (Route::has('login'))
         <div class="top-right links">
             @auth
@@ -81,14 +81,15 @@
     @endif
 
     <div class="content">
-{{--        <div class="title m-b-md">--}}
-{{--            Laravel--}}
-{{--        </div>--}}
+        <div class="title m-b-md">
+            <h1>
+                Circadian
+            </h1>
+        </div>
         <div id="app">
             <example-component></example-component>
         </div>
     </div>
-</div>
-<script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>

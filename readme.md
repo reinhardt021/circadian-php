@@ -1,3 +1,34 @@
+# Circadian
+
+Interval Training app
+* Built with Laravel
+
+## Setup
+
+```
+$ vagrant ssh
+
+
+cd my project
+
+$ mysql
+
+show databases;
+use database-name;
+show tables;
+
+CREATE database circadian;
+
+exit
+
+# then update the .env file with the database credentials
+
+$ php artisan migrate once the database is created
+
+```
+
+---
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
