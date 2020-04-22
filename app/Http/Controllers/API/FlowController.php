@@ -62,12 +62,14 @@ class FlowController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  FlowShowQuery $query
+     * @param  Request $request
      *
      * @return JsonResponse
      */
-    public function show(FlowShowQuery $query)
+    public function show(Request $request)
     {
+        $query = FlowShowQuery::buildFromRequest($request);
+
         return \response()->json(
             [
                 'message' => 'Flow has been found',

@@ -8,8 +8,18 @@ class FlowShowQuery
 {
     public int $id;
 
-    public function __construct(Request $request)
+    /**
+     * Create Query from Request
+     *
+     * @param Request $request
+     *
+     * @return self
+     */
+    public static function buildFromRequest(Request $request)
     {
-        $this->id = $request->flow;
+        $query = new self();
+        $query->id = $request->flow;
+
+        return $query;
     }
 }
