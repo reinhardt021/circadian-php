@@ -19,22 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // todo: need to scaffold th auth at least today
 
-// GET/POST api/flows/
-// GET/PUT/DELETE api/flows/:id/
-Route::resource('flows', 'FlowController')->only([
-    'index',
-    'store',
-    'show',
-    'update',
-    'destroy',
-]);
-
-// GET/POST api/flows/:id/tasks/
-// GET/PUT/DELETE api/flows/:id/tasks/:taskId
-Route::resource('flows/{flow}/tasks', 'TaskController')->only([
-    'index',
-    'store',
-    'show',
-    'update',
-    'destroy',
-]);
+Route::apiResource('flows', 'API\FlowController');
+Route::apiResource('flows/{flow}/tasks', 'API\TaskController');
