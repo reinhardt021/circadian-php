@@ -14,9 +14,7 @@ class FlowTest extends TestCase
     // todo: create a separate test database with seeded data to test full features .env.test
 
     /**
-     * A GET Flow resources API test
-     *
-     * @return void
+     * A test for the GET Flow resources API
      */
     public function testFlowIndex()
     {
@@ -36,9 +34,7 @@ class FlowTest extends TestCase
     }
 
     /**
-     * A Flow POST API test
-     *
-     * @return void
+     * A test for the Flow POST API
      */
     public function testFlowStore()
     {
@@ -71,9 +67,7 @@ class FlowTest extends TestCase
     }
 
     /**
-     * A GET individual Flow resource API test
-     *
-     * @return void
+     * A test for the GET individual Flow API
      */
     public function testFlowShow()
     {
@@ -101,7 +95,43 @@ class FlowTest extends TestCase
         $response->assertJsonStructure($expectedStructure);
         $this->assertEquals($flow->id, $json['data']['id']);
     }
-//    public function testFlowUpdate()
+
+    /**
+     * A test for the Flow update API
+     */
+    public function testFlowUpdate()
+    {
+        // ARRANGE
+        $flows = factory(Flow::class, 1)->create();
+        $flow = $flows[0];
+        $uri = '/api/flows/' . $flow->id;
+        $data = [
+            'title' => 'New Flow API Test',
+        ];
+        $expectedStructure = [
+            'message',
+            'data' => [
+                'id',
+                'title',
+                'created_at',
+                'updated_at',
+                'deleted_at',
+            ],
+        ];
+
+        // ACT
+        $response = $this->put($uri, $data);
+        $json = $response->json();
+
+        // ASSERT
+        $response->assertStatus(Response::HTTP_OK);
+        $response->assertJsonStructure($expectedStructure);
+        $this->assertEquals($flow->id, $json['data']['id']);
+        $this->assertEquals(
+            $data['title'],
+            $json['data']['title']
+        );
+    }
 //    public function testFlowDestroy()
 
 }
