@@ -48,6 +48,8 @@ class FlowResourceService
      */
     public function getFlow(FlowShowQuery $query)
     {
+        // todo: consider Repository pattern for better testability
+        // if Repo pattern used then can combine this with getFlows() just diff Criteria passed
         $flow = Flow::find($query->id);
 
         return $flow;
