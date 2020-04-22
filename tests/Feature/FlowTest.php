@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Flow;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -10,7 +11,7 @@ class FlowTest extends TestCase
 {
     use RefreshDatabase;
 
-    // todo: create a separate test database with seeded data to test full features
+    // todo: create a separate test database with seeded data to test full features .env.test
 
     /**
      * A Flow GET API test
@@ -20,16 +21,18 @@ class FlowTest extends TestCase
     public function testFlowIndex()
     {
         // ARRANGE
+        $flows = factory(Flow::class, 3)->create();
         $uri = '/api/flows';
-        // todo: use Factories to create Tasks to see + clear from DB after test
         $expectedStructure = ['message', 'data'];
 
         // ACT
         $response = $this->get($uri);
+        $json = $response->json();
 
         //ASSERT
         $response->assertStatus(Response::HTTP_OK);
         $response->assertJsonStructure($expectedStructure);
+        $this->assertCount(\count($flows), $json['data']);
     }
 
     /**
@@ -48,7 +51,6 @@ class FlowTest extends TestCase
 
         // ACT
         $response = $this->postJson($uri, $data);
-        // todo: figure out how to remove the entities from the database post test
 
         //ASSERT
         $response->assertStatus(Response::HTTP_CREATED);
