@@ -19,6 +19,7 @@ class TaskTest extends TestCase
     public function testTaskIndex()
     {
         // ARRANGE
+        // todo: create Flow for tasks to attach to
         $tasks = factory(Task::class, 3)->create();
         $uri = '/api/flows/1/tasks';
         $expectedStructure = ['message', 'data'];
@@ -41,6 +42,7 @@ class TaskTest extends TestCase
     public function testTaskStore()
     {
         // ARRANGE
+        // todo: create Flow for tasks to attach to
         $uri = '/api/flows/1/tasks';
         $data = [
             'title' => 'New Flow API Test',
@@ -70,7 +72,34 @@ class TaskTest extends TestCase
             $json['data']['title']
         );
     }
-//    public function testTaskShow()
+
+    public function testTaskShow()
+    {
+        // ARRANGE
+        // todo: create Flow for tasks to attach to
+        $tasks = factory(Task::class, 1)->create();
+        $task = $tasks[0];
+        $uri = '/api/flows/1/tasks/' . $task->id;
+        $expectedStructure = [
+            'message',
+            'data' => [
+                'id',
+                'title',
+                'created_at',
+                'updated_at',
+                'deleted_at',
+            ],
+        ];
+
+        // ACT
+        $response = $this->get($uri);
+        $json = $response->json();
+
+        //ASSERT
+        $response->assertStatus(Response::HTTP_OK);
+        $response->assertJsonStructure($expectedStructure);
+        $this->assertEquals($task->id, $json['data']['id']);
+    }
 //    public function testTaskUpdate()
 //    public function testTaskDestroy()
 }
