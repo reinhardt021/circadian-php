@@ -17,7 +17,6 @@ class FlowController extends Controller
      */
     public function index()
     {
-        //NOTE that this API works
         // todo: move to query object
         // todo: use the request to get the User in the session
 
@@ -29,7 +28,7 @@ class FlowController extends Controller
 
         return \response()->json(
             [
-                'message' => 'Flow index route',
+                'message' => 'Flow entities index',
                 'data' => $data,
             ],
             Response::HTTP_OK
@@ -45,7 +44,6 @@ class FlowController extends Controller
      */
     public function store(Request $request)
     {
-        //NOTE that this API works
         $title = $request->input('title');
 
         /** @var Flow $flow */
@@ -55,7 +53,7 @@ class FlowController extends Controller
 
         return \response()->json(
             [
-                'message' => 'Flow store route',
+                'message' => 'Flow has been created',
                 'data' => $flow,
             ],
             Response::HTTP_CREATED
@@ -71,14 +69,16 @@ class FlowController extends Controller
      */
     public function show(int $id)
     {
-        //NOTE that this API works
         /** @var Flow $data */
         $data = Flow::find($id);
 
-        return \response()->json([
-            'message' => 'Flow show route',
-            'data' => $data,
-        ]);
+        return \response()->json(
+            [
+                'message' => 'Flow has been found',
+                'data' => $data,
+            ],
+            Response::HTTP_OK
+        );
     }
 
     /**
@@ -91,7 +91,6 @@ class FlowController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //NOTE that this API works
         $title = $request->input('title');
 
         /** @var Flow $data */
@@ -99,10 +98,13 @@ class FlowController extends Controller
         $data->title = $title;
         $data->save();
 
-        return \response()->json([
-            'message' => 'Flow update route',
-            'data' => $data,
-        ]);
+        return \response()->json(
+            [
+                'message' => 'Flow has been updated',
+                'data' => $data,
+            ],
+            Response::HTTP_OK
+        );
     }
 
     /**
@@ -119,9 +121,6 @@ class FlowController extends Controller
         $data = Flow::find($id);
         $data->delete();
 
-        return \response()->json([
-            'message' => 'Flow destroy route',
-            'data' => $data,
-        ]);
+        return \response()->json('', Response::HTTP_NO_CONTENT);
     }
 }
