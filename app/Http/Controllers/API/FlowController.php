@@ -42,12 +42,14 @@ class FlowController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param FlowStoreCommand $command
+     * @param Request $request
      *
      * @return JsonResponse
      */
-    public function store(FlowStoreCommand $command)
+    public function store(Request $request)
     {
+        $command = FlowStoreCommand::buildFromRequest($request);
+
         return \response()->json(
             [
                 'message' => 'Flow has been created',

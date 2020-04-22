@@ -8,8 +8,11 @@ class FlowStoreCommand
 {
     public string $title;
 
-    public function __construct(Request $request)
+    public static function buildFromRequest(Request $request)
     {
-        $this->title = $request->input('title');
+        $command = new self();
+        $command->title = $request->input('title');
+
+        return $command;
     }
 }
