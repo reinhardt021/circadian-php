@@ -3,23 +3,32 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Task;
+use App\Queries\TaskIndexQuery;
+use App\Services\TaskResourceService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class TaskController extends Controller
 {
+    private TaskResourceService $service;
+
+    public function __construct(TaskResourceService $service)
+    {
+        $this->service = $service;
+    }
+
     /**
      * Display a listing of the resource.
      *
+     * @param TaskIndexQuery $query
+     *
      * @return Response
      */
-    public function index()
+    public function index(TaskIndexQuery $query)
     {
-        $data = Task::all();
         return response()->json([
             'message' => 'Task index route',
-            'data' => $data,
+            'data' => $this->service->getTasks($query),
         ]);
     }
 
