@@ -29,13 +29,11 @@ class FlowController extends Controller
     public function index()
     {
         // todo: use the request to get the User in the session >> do in Query DTO
-        $data = $this->service->getFlows();
-
         // todo: use fractal / transformer
         return \response()->json(
             [
                 'message' => 'Flow entities index',
-                'data' => $data,
+                'data' => $this->service->getFlows(),
             ],
             Response::HTTP_OK
         );
@@ -50,12 +48,10 @@ class FlowController extends Controller
      */
     public function store(FlowStoreCommand $command)
     {
-        $data = $this->service->postFlow($command);
-
         return \response()->json(
             [
                 'message' => 'Flow has been created',
-                'data' => $data,
+                'data' => $this->service->postFlow($command),
             ],
             Response::HTTP_CREATED
         );
@@ -70,13 +66,10 @@ class FlowController extends Controller
      */
     public function show(FlowShowQuery $query)
     {
-        /** @var Flow $data */
-        $data = Flow::find($query->id);
-
         return \response()->json(
             [
                 'message' => 'Flow has been found',
-                'data' => $data,
+                'data' => $this->service->getFlow($query),
             ],
             Response::HTTP_OK
         );
