@@ -8,11 +8,19 @@ use App\Commands\FlowUpdateCommand;
 use App\Flow;
 use App\Queries\FlowShowQuery;
 use App\Http\Controllers\Controller;
+use App\Services\FlowResourceService;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class FlowController extends Controller
 {
+    private FlowResourceService $service;
+
+    public function __construct(FlowResourceService $service)
+    {
+        $this->service = $service;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,14 +28,10 @@ class FlowController extends Controller
      */
     public function index()
     {
-        // todo: use the request to get the User in the session >> do in Query dto
-
-        // move to a service that takes the command
-        /** @var Flow $data */
-        $data = Flow::all();
+        // todo: use the request to get the User in the session >> do in Query DTO
+        $data = $this->service->getFlows();
 
         // todo: use fractal / transformer
-
         return \response()->json(
             [
                 'message' => 'Flow entities index',
