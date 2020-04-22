@@ -23,12 +23,14 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param TaskIndexQuery $query
+     * @param Request $request
      *
      * @return JsonResponse
      */
-    public function index(TaskIndexQuery $query)
+    public function index(Request $request)
     {
+        $query = TaskIndexQuery::buildFromRequest($request);
+
         return \response()->json(
             [
                 'message' => 'Task index route',
@@ -90,13 +92,13 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param TaskDestroyCommand $command
+     * @param Request $request
      *
      * @return JsonResponse
      */
-    public function destroy(TaskDestroyCommand $command)
+    public function destroy(Request $request)
     {
-        $this->service->deleteTask($command);
+        $this->service->deleteTask(TaskDestroyCommand::buildFromRequest($request));
 
         return \response()->json('', Response::HTTP_NO_CONTENT);
     }

@@ -8,8 +8,18 @@ class TaskIndexQuery
 {
     public int $flowId;
 
-    public function __construct(Request $request)
+    /**
+     * Create a Query object from a Request object
+     *
+     * @param Request $request
+     *
+     * @return self
+     */
+    public static function buildFromRequest(Request $request)
     {
-        $this->flowId = $request->flow;
+        $query = new self();
+        $query->flowId = $request->flow;
+
+        return $query;
     }
 }

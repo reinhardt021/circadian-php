@@ -9,9 +9,19 @@ class TaskDestroyCommand
     public int $flowId;
     public int $taskId;
 
-    public function __construct(Request $request)
+    /**
+     * Create Command from Request
+     *
+     * @param Request $request
+     *
+     * @return self
+     */
+    public static function buildFromRequest(Request $request)
     {
-        $this->flowId = $request->flow;
-        $this->taskId = $request->task;
+        $command = new self();
+        $command->flowId = $request->flow;
+        $command->taskId = $request->task;
+
+        return $command;
     }
 }
