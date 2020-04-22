@@ -84,15 +84,10 @@ class FlowController extends Controller
      */
     public function update(FlowUpdateCommand $command)
     {
-        /** @var Flow $data */
-        $data = Flow::find($command->id);
-        $data->title = $command->title;
-        $data->save();
-
         return \response()->json(
             [
                 'message' => 'Flow has been updated',
-                'data' => $data,
+                'data' => $this->service->updateFlow($command),
             ],
             Response::HTTP_OK
         );
@@ -108,9 +103,7 @@ class FlowController extends Controller
      */
     public function destroy(FlowDestroyCommand $command)
     {
-        /** @var Flow $data */
-        $data = Flow::find($command->id);
-        $data->delete();
+        $this->service->deleteFlow($command);
 
         return \response()->json('', Response::HTTP_NO_CONTENT);
     }
