@@ -4,11 +4,14 @@ namespace Tests\Feature;
 
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class FlowTest extends TestCase
 {
+    use RefreshDatabase;
+
+    // todo: create a separate test database with seeded data to test full features
+
     /**
      * A Flow GET API test
      *
@@ -18,6 +21,7 @@ class FlowTest extends TestCase
     {
         // ARRANGE
         $uri = '/api/flows';
+        // todo: use Factories to create Tasks to see + clear from DB after test
         $expectedStructure = ['message', 'data'];
 
         // ACT
@@ -44,6 +48,7 @@ class FlowTest extends TestCase
 
         // ACT
         $response = $this->postJson($uri, $data);
+        // todo: figure out how to remove the entities from the database post test
 
         //ASSERT
         $response->assertStatus(Response::HTTP_CREATED);

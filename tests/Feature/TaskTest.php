@@ -4,11 +4,12 @@ namespace Tests\Feature;
 
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TaskTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * A Task Index API test.
      *
@@ -18,6 +19,7 @@ class TaskTest extends TestCase
     {
         // ARRANGE
         $uri = '/api/flows/1/tasks';
+        // todo: use Factories to create Tasks to see + clear from DB after test
         $expectedStructure = ['message', 'data'];
 
         // ACT
@@ -47,6 +49,7 @@ class TaskTest extends TestCase
 
         // ACT
         $response = $this->postJson($uri, $data);
+        // todo: figure out how to remove the entities from the database post test
 
         //ASSERT
         $response->assertStatus(Response::HTTP_CREATED);
