@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Commands\TaskDestroyCommand;
+use App\Commands\TaskStoreCommand;
 use App\Http\Controllers\Controller;
 use App\Queries\TaskIndexQuery;
 use App\Services\TaskResourceService;
@@ -28,10 +29,13 @@ class TaskController extends Controller
      */
     public function index(TaskIndexQuery $query)
     {
-        return \response()->json([
-            'message' => 'Task index route',
-            'data' => $this->service->getTasks($query),
-        ]);
+        return \response()->json(
+            [
+                'message' => 'Task index route',
+                'data' => $this->service->getTasks($query),
+            ],
+            Response::HTTP_OK
+        );
     }
 
     /**
@@ -43,11 +47,15 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $title = $request->input('title');
+        $command = TaskStoreCommand::buildFromRequest($request);
 
-        return \response()->json([
-            'data' => "task store route with new title $title",
-        ]);
+        return \response()->json(
+            [
+                'message' => 'Task store route',
+                'data' => $this->service->postTask($command),
+            ],
+            Response::HTTP_CREATED
+        );
     }
 
     /**

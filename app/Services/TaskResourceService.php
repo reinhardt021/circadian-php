@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Commands\TaskDestroyCommand;
+use App\Commands\TaskStoreCommand;
 use App\Queries\TaskIndexQuery;
 use App\Task;
 use Illuminate\Database\Eloquent\Collection;
@@ -24,6 +25,19 @@ class TaskResourceService
         return $tasks;
     }
 
+    public function postTask(TaskStoreCommand $command)
+    {
+        // todo: update to use the flowId to narrow down Flow to add tasks to
+        $task = new Task();
+        $task->title = $command->title;
+        $task->hours = $command->hours;
+        $task->minutes = $command->minutes;
+        $task->seconds = $command->seconds;
+        $task->save();
+
+        return $task;
+    }
+
     /**
      * Delete a Task
      *
@@ -34,6 +48,7 @@ class TaskResourceService
      */
     public function deleteTask(TaskDestroyCommand $command)
     {
+        // todo: update to use the flowId to narrow down task returned
         /** @var Task $task */
         $task = Task::find($command->taskId);
 
