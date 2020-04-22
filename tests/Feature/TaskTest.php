@@ -143,6 +143,17 @@ class TaskTest extends TestCase
 
     public function testTaskDestroy()
     {
-        // todo
+        // ARRANGE
+        // todo: create Flow for tasks to attach to
+        $tasks = factory(Task::class, 1)->create();
+        $task = $tasks[0];
+        $uri = '/api/flows/1/tasks/' . $task->id;
+
+        // ACT
+        $response = $this->delete($uri);
+
+        // ASSERT
+        $response->assertStatus(Response::HTTP_NO_CONTENT);
+        $this->assertEmpty($response->content());
     }
 }
