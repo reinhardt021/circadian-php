@@ -132,6 +132,19 @@ class FlowTest extends TestCase
             $json['data']['title']
         );
     }
-//    public function testFlowDestroy()
 
+    public function testFlowDestroy()
+    {
+        // ARRANGE
+        $flows = factory(Flow::class, 1)->create();
+        $flow = $flows[0];
+        $uri = '/api/flows/' . $flow->id;
+
+        // ACT
+        $response = $this->delete($uri);
+
+        // ASSERT
+        $response->assertStatus(Response::HTTP_NO_CONTENT);
+        $this->assertEmpty($response->content());
+    }
 }
