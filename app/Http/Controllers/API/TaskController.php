@@ -6,6 +6,7 @@ use App\Commands\TaskDestroyCommand;
 use App\Commands\TaskStoreCommand;
 use App\Http\Controllers\Controller;
 use App\Queries\TaskIndexQuery;
+use App\Queries\TaskShowQuery;
 use App\Services\TaskResourceService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -63,15 +64,21 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Request $request
      *
      * @return JsonResponse
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        return \response()->json([
-            'data' => 'task show',
-        ]);
+        $query = TaskShowQuery::buildFromRequest($request);
+
+        return \response()->json(
+            [
+                'message' => 'Task show route',
+                'data' => $this->service->getTask($query),
+            ],
+            Response::HTTP_OK
+        );
     }
 
     /**

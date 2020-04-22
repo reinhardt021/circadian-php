@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Commands\TaskDestroyCommand;
 use App\Commands\TaskStoreCommand;
 use App\Queries\TaskIndexQuery;
+use App\Queries\TaskShowQuery;
 use App\Task;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -34,6 +35,14 @@ class TaskResourceService
         $task->minutes = $command->minutes;
         $task->seconds = $command->seconds;
         $task->save();
+
+        return $task;
+    }
+
+    public function getTask(TaskShowQuery $query)
+    {
+        // todo: update to use the flowId to narrow down Flow to add tasks to
+        $task = Task::find($query->taskId);
 
         return $task;
     }
