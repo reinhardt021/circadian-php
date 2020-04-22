@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Commands\TaskDestroyCommand;
 use App\Commands\TaskStoreCommand;
+use App\Commands\TaskUpdateCommand;
 use App\Http\Controllers\Controller;
 use App\Queries\TaskIndexQuery;
 use App\Queries\TaskShowQuery;
@@ -85,15 +86,20 @@ class TaskController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  int  $id
      *
      * @return JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        return \response()->json([
-            'data' => 'task update',
-        ]);
+        $command = TaskUpdateCommand::buildFromRequest($request);
+
+        return \response()->json(
+            [
+                'message' => 'Task update route',
+                'data' => $this->service->updateTask($command),
+            ],
+            Response::HTTP_OK
+        );
     }
 
     /**
