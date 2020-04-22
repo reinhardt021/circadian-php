@@ -10,19 +10,22 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class FlowTest extends TestCase
 {
     /**
-     * A Flow Index API test
+     * A Flow GET API test
      *
      * @return void
      */
     public function testFlowIndex()
     {
         // ARRANGE
+        $uri = '/api/flows';
+        $expectedStructure = ['message', 'data'];
 
         // ACT
-        $response = $this->get('/api/flows');
+        $response = $this->get($uri);
 
         //ASSERT
         $response->assertStatus(Response::HTTP_OK);
+        $response->assertJsonStructure($expectedStructure);
     }
 
     /**
@@ -33,15 +36,18 @@ class FlowTest extends TestCase
     public function testFlowStore()
     {
         // ARRANGE
+        $uri = '/api/flows';
         $data = [
-            'title' => 'New Flow API Test'
+            'title' => 'New Flow API Test',
         ];
+        $expectedStructure = ['message', 'data'];
 
         // ACT
-        $response = $this->postJson('/api/flows', $data);
+        $response = $this->postJson($uri, $data);
 
         //ASSERT
         $response->assertStatus(Response::HTTP_CREATED);
+        $response->assertJsonStructure($expectedStructure);
     }
 
 //    public function testFlowShow()
