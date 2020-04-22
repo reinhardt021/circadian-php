@@ -6,6 +6,7 @@ use App\Flow;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class FlowController extends Controller
 {
@@ -26,10 +27,13 @@ class FlowController extends Controller
 
         // todo: use fractal / transformer
 
-        return \response()->json([
-            'message' => 'Flow index route',
-            'data' => $data,
-        ]);
+        return \response()->json(
+            [
+                'message' => 'Flow index route',
+                'data' => $data,
+            ],
+            Response::HTTP_OK
+        );
     }
 
     /**
@@ -49,10 +53,13 @@ class FlowController extends Controller
         $flow->title = $title;
         $flow->save();
 
-        return \response()->json([
-            'message' => 'Flow store route',
-            'data' => $flow,
-        ]);
+        return \response()->json(
+            [
+                'message' => 'Flow store route',
+                'data' => $flow,
+            ],
+            Response::HTTP_CREATED
+        );
     }
 
     /**
