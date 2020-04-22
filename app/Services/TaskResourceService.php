@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Commands\TaskDestroyCommand;
 use App\Queries\TaskIndexQuery;
 use App\Task;
 use Illuminate\Database\Eloquent\Collection;
@@ -21,5 +22,21 @@ class TaskResourceService
         $tasks = Task::all();
 
         return $tasks;
+    }
+
+    /**
+     * Delete a Task
+     *
+     * @param TaskDestroyCommand $command
+     *
+     * @return bool|null
+     * @throws \Exception
+     */
+    public function deleteTask(TaskDestroyCommand $command)
+    {
+        /** @var Task $task */
+        $task = Task::find($command->taskId);
+
+        return $task->delete();
     }
 }

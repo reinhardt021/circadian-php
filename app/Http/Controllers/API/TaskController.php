@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Commands\TaskDestroyCommand;
 use App\Http\Controllers\Controller;
 use App\Queries\TaskIndexQuery;
 use App\Services\TaskResourceService;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class TaskController extends Controller
 {
@@ -22,11 +24,11 @@ class TaskController extends Controller
      *
      * @param TaskIndexQuery $query
      *
-     * @return Response
+     * @return JsonResponse
      */
     public function index(TaskIndexQuery $query)
     {
-        return response()->json([
+        return \response()->json([
             'message' => 'Task index route',
             'data' => $this->service->getTasks($query),
         ]);
@@ -35,14 +37,15 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return Response
+     * @param Request $request
+     *
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
         $title = $request->input('title');
 
-        return response()->json([
+        return \response()->json([
             'data' => "task store route with new title $title",
         ]);
     }
@@ -51,11 +54,12 @@ class TaskController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return Response
+     *
+     * @return JsonResponse
      */
     public function show($id)
     {
-        return response()->json([
+        return \response()->json([
             'data' => 'task show',
         ]);
     }
@@ -63,13 +67,14 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  int  $id
-     * @return Response
+     *
+     * @return JsonResponse
      */
     public function update(Request $request, $id)
     {
-        return response()->json([
+        return \response()->json([
             'data' => 'task update',
         ]);
     }
@@ -77,13 +82,14 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return Response
+     * @param TaskDestroyCommand $command
+     *
+     * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy(TaskDestroyCommand $command)
     {
-        return response()->json([
-            'data' => 'task destroy',
-        ]);
+        $this->service->deleteTask($command);
+
+        return \response()->json('', Response::HTTP_NO_CONTENT);
     }
 }
