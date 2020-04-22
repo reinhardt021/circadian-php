@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API;
 use App\Commands\FlowDestroyCommand;
 use App\Commands\FlowStoreCommand;
 use App\Commands\FlowUpdateCommand;
-use App\Flow;
 use App\Queries\FlowShowQuery;
 use App\Http\Controllers\Controller;
 use App\Services\FlowResourceService;
