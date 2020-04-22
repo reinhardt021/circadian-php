@@ -35,7 +35,7 @@ class TaskController extends Controller
 
         return \response()->json(
             [
-                'message' => 'Task entities index',
+                'message' => 'Task index route',
                 'data' => $this->service->getTasks($query),
             ],
             Response::HTTP_OK
@@ -55,7 +55,7 @@ class TaskController extends Controller
 
         return \response()->json(
             [
-                'message' => 'Task has been created',
+                'message' => 'Task store route',
                 'data' => $this->service->postTask($command),
             ],
             Response::HTTP_CREATED
@@ -75,7 +75,7 @@ class TaskController extends Controller
 
         return \response()->json(
             [
-                'message' => 'Task has been found',
+                'message' => 'Task show route',
                 'data' => $this->service->getTask($query),
             ],
             Response::HTTP_OK
@@ -95,7 +95,7 @@ class TaskController extends Controller
 
         return \response()->json(
             [
-                'message' => 'Task has been updated',
+                'message' => 'Task update route',
                 'data' => $this->service->updateTask($command),
             ],
             Response::HTTP_OK

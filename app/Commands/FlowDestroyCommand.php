@@ -8,8 +8,18 @@ class FlowDestroyCommand
 {
     public int $id;
 
-    public function __construct(Request $request)
+    /**
+     * Create Command from Request
+     *
+     * @param Request $request
+     *
+     * @return self
+     */
+    public static function buildFromRequest(Request $request)
     {
-        $this->id = $request->flow;
+        $command = new self();
+        $command->id = $request->flow;
+
+        return $command;
     }
 }

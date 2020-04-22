@@ -8,6 +8,13 @@ class FlowStoreCommand
 {
     public string $title;
 
+    /**
+     * Create Command from Request
+     *
+     * @param Request $request
+     *
+     * @return self
+     */
     public static function buildFromRequest(Request $request)
     {
         $command = new self();

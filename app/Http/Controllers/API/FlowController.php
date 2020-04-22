@@ -32,7 +32,7 @@ class FlowController extends Controller
         // todo: use fractal / transformer
         return \response()->json(
             [
-                'message' => 'Flow entities index',
+                'message' => 'Flow index route',
                 'data' => $this->service->getFlows(),
             ],
             Response::HTTP_OK
@@ -52,7 +52,7 @@ class FlowController extends Controller
 
         return \response()->json(
             [
-                'message' => 'Flow has been created',
+                'message' => 'Flow store route',
                 'data' => $this->service->postFlow($command),
             ],
             Response::HTTP_CREATED
@@ -72,7 +72,7 @@ class FlowController extends Controller
 
         return \response()->json(
             [
-                'message' => 'Flow has been found',
+                'message' => 'Flow show route',
                 'data' => $this->service->getFlow($query),
             ],
             Response::HTTP_OK
@@ -92,7 +92,7 @@ class FlowController extends Controller
 
         return \response()->json(
             [
-                'message' => 'Flow has been updated',
+                'message' => 'Flow update route',
                 'data' => $this->service->updateFlow($command),
             ],
             Response::HTTP_OK
@@ -107,9 +107,9 @@ class FlowController extends Controller
      * @return JsonResponse
      * @throws \Exception
      */
-    public function destroy(FlowDestroyCommand $command)
+    public function destroy(Request $request)
     {
-        $this->service->deleteFlow($command);
+        $this->service->deleteFlow(FlowDestroyCommand::buildFromRequest($request));
 
         return \response()->json('', Response::HTTP_NO_CONTENT);
     }
