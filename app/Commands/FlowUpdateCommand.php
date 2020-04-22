@@ -9,9 +9,19 @@ class FlowUpdateCommand
     public int $id;
     public string $title;
 
-    public function __construct(Request $request)
+    /**
+     * Create Command from Request
+     *
+     * @param Request $request
+     *
+     * @return self
+     */
+    public static function buildFromRequest(Request $request)
     {
-        $this->id = $request->flow;
-        $this->title = $request->input('title');
+        $command = new self();
+        $command->id = $request->flow;
+        $command->title = $request->input('title');
+
+        return $command;
     }
 }

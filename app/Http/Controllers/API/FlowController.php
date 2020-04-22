@@ -9,6 +9,7 @@ use App\Queries\FlowShowQuery;
 use App\Http\Controllers\Controller;
 use App\Services\FlowResourceService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class FlowController extends Controller
@@ -77,12 +78,14 @@ class FlowController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param FlowUpdateCommand $command
+     * @param Request $request
      *
      * @return JsonResponse
      */
-    public function update(FlowUpdateCommand $command)
+    public function update(Request $request)
     {
+        $command = FlowUpdateCommand::buildFromRequest($request);
+
         return \response()->json(
             [
                 'message' => 'Flow has been updated',
