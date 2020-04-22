@@ -50,15 +50,12 @@ class FlowController extends Controller
      */
     public function store(FlowStoreCommand $command)
     {
-        /** @var Flow $flow */
-        $flow = new Flow();
-        $flow->title = $command->title;
-        $flow->save();
+        $data = $this->service->postFlow($command);
 
         return \response()->json(
             [
                 'message' => 'Flow has been created',
-                'data' => $flow,
+                'data' => $data,
             ],
             Response::HTTP_CREATED
         );
