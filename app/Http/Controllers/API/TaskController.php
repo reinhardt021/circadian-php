@@ -108,6 +108,7 @@ class TaskController extends Controller
      * @param Request $request
      *
      * @return JsonResponse
+     * @throws \Exception
      */
     public function destroy(Request $request)
     {

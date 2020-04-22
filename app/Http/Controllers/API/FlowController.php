@@ -62,7 +62,7 @@ class FlowController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Request $request
+     * @param Request $request
      *
      * @return JsonResponse
      */
@@ -102,7 +102,7 @@ class FlowController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  FlowDestroyCommand $command
+     * @param Request $request
      *
      * @return JsonResponse
      * @throws \Exception

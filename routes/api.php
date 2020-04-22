@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// todo: need to scaffold th auth at least today
+// todo: need to scaffold the auth
 
 Route::apiResource('flows', 'API\FlowController');
 Route::apiResource('flows/{flow}/tasks', 'API\TaskController');
