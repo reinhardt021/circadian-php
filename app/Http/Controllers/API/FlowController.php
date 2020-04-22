@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Commands\FlowStoreCommand;
 use App\Flow;
+use App\Queries\FlowShowQuery;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
@@ -38,17 +40,15 @@ class FlowController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param FlowStoreCommand $command
      *
      * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(FlowStoreCommand $command)
     {
-        $title = $request->input('title');
-
         /** @var Flow $flow */
         $flow = new Flow();
-        $flow->title = $title;
+        $flow->title = $command->title;
         $flow->save();
 
         return \response()->json(
@@ -63,14 +63,14 @@ class FlowController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  FlowShowQuery $query
      *
      * @return JsonResponse
      */
-    public function show(int $id)
+    public function show(FlowShowQuery $query)
     {
         /** @var Flow $data */
-        $data = Flow::find($id);
+        $data = Flow::find($query->id);
 
         return \response()->json(
             [
