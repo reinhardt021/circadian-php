@@ -21,14 +21,14 @@ class FlowController extends Controller
         // todo: use the request to get the User in the session
 
         // move to a service that takes the command
-        $results = Flow::all();
-        // returns dataset
+        /** @var Flow $data */
+        $data = Flow::all();
 
         // todo: use fractal / transformer
 
         return \response()->json([
             'message' => 'Flow index route',
-            'data' => $results,
+            'data' => $data,
         ]);
     }
 
@@ -36,6 +36,7 @@ class FlowController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
+     *
      * @return JsonResponse
      */
     public function store(Request $request)
@@ -43,6 +44,7 @@ class FlowController extends Controller
         //NOTE that this API works
         $title = $request->input('title');
 
+        /** @var Flow $flow */
         $flow = new Flow();
         $flow->title = $title;
         $flow->save();
@@ -57,11 +59,13 @@ class FlowController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
+     *
      * @return JsonResponse
      */
     public function show(int $id)
     {
         //NOTE that this API works
+        /** @var Flow $data */
         $data = Flow::find($id);
 
         return \response()->json([
@@ -75,6 +79,7 @@ class FlowController extends Controller
      *
      * @param Request $request
      * @param  int  $id
+     *
      * @return JsonResponse
      */
     public function update(Request $request, $id)
@@ -82,6 +87,7 @@ class FlowController extends Controller
         //NOTE that this API works
         $title = $request->input('title');
 
+        /** @var Flow $data */
         $data = Flow::find($id);
         $data->title = $title;
         $data->save();
@@ -96,11 +102,15 @@ class FlowController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
+     *
      * @return JsonResponse
+     * @throws \Exception
      */
     public function destroy($id)
     {
+        /** @var Flow $data */
         $data = Flow::find($id);
+        $data->delete();
 
         return \response()->json([
             'message' => 'Flow destroy route',
