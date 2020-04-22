@@ -100,6 +100,49 @@ class TaskTest extends TestCase
         $response->assertJsonStructure($expectedStructure);
         $this->assertEquals($task->id, $json['data']['id']);
     }
-//    public function testTaskUpdate()
-//    public function testTaskDestroy()
+
+    public function testTaskUpdate()
+    {
+        // ARRANGE
+        // todo: create Flow for tasks to attach to
+        $tasks = factory(Task::class, 1)->create();
+        $task = $tasks[0];
+        $uri = '/api/flows/1/tasks/' . $task->id;
+        $data = [
+            'title' => 'Updated Flow API Test',
+            'minutes' => 13,
+        ];
+        $expectedStructure = [
+            'message',
+            'data' => [
+                'id',
+                'title',
+                'created_at',
+                'updated_at',
+                'deleted_at',
+            ],
+        ];
+
+        // ACT
+        $response = $this->put($uri, $data);
+        $json = $response->json();
+
+        // ASSERT
+        $response->assertStatus(Response::HTTP_OK);
+        $response->assertJsonStructure($expectedStructure);
+        $this->assertEquals($task->id, $json['data']['id']);
+        $this->assertEquals($data['title'], $json['data']['title']);
+
+        // test that the Task.hours stay the same
+        $this->assertEquals($task->hours, $json['data']['hours']);
+        $this->assertEquals($data['minutes'], $json['data']['minutes']);
+
+        // test that the Task.seconds stay the same
+        $this->assertEquals($task->seconds, $json['data']['seconds']);
+    }
+
+    public function testTaskDestroy()
+    {
+        // todo
+    }
 }
