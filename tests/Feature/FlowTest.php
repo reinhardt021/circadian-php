@@ -47,14 +47,27 @@ class FlowTest extends TestCase
         $data = [
             'title' => 'New Flow API Test',
         ];
-        $expectedStructure = ['message', 'data'];
+        $expectedStructure = [
+            'message',
+            'data' => [
+                'id',
+                'created_at',
+                'updated_at',
+                'title',
+            ],
+        ];
 
         // ACT
         $response = $this->postJson($uri, $data);
+        $json = $response->json();
 
         //ASSERT
         $response->assertStatus(Response::HTTP_CREATED);
         $response->assertJsonStructure($expectedStructure);
+        $this->assertEquals(
+            $data['title'],
+            $json['data']['title']
+        );
     }
 
 //    public function testFlowShow()

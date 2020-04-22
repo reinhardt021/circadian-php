@@ -48,14 +48,27 @@ class TaskTest extends TestCase
             'minutes' => 13,
             'seconds' => 9,
         ];
-        $expectedStructure = ['message', 'data'];
+        $expectedStructure = [
+            'message',
+            'data' => [
+                'id',
+                'created_at',
+                'updated_at',
+                'title',
+            ],
+        ];
 
         // ACT
         $response = $this->postJson($uri, $data);
+        $json = $response->json();
 
         //ASSERT
         $response->assertStatus(Response::HTTP_CREATED);
         $response->assertJsonStructure($expectedStructure);
+        $this->assertEquals(
+            $data['title'],
+            $json['data']['title']
+        );
     }
 //    public function testTaskShow()
 //    public function testTaskUpdate()
