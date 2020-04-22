@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Commands\FlowDestroyCommand;
 use App\Commands\FlowStoreCommand;
+use App\Commands\FlowUpdateCommand;
 use App\Flow;
 use App\Queries\FlowShowQuery;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,8 +20,7 @@ class FlowController extends Controller
      */
     public function index()
     {
-        // todo: move to query object
-        // todo: use the request to get the User in the session
+        // todo: use the request to get the User in the session >> do in Query dto
 
         // move to a service that takes the command
         /** @var Flow $data */
@@ -84,18 +84,15 @@ class FlowController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param  int  $id
+     * @param FlowUpdateCommand $command
      *
      * @return JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(FlowUpdateCommand $command)
     {
-        $title = $request->input('title');
-
         /** @var Flow $data */
-        $data = Flow::find($id);
-        $data->title = $title;
+        $data = Flow::find($command->id);
+        $data->title = $command->title;
         $data->save();
 
         return \response()->json(
@@ -110,15 +107,15 @@ class FlowController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  FlowDestroyCommand $command
      *
      * @return JsonResponse
      * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(FlowDestroyCommand $command)
     {
         /** @var Flow $data */
-        $data = Flow::find($id);
+        $data = Flow::find($command->id);
         $data->delete();
 
         return \response()->json('', Response::HTTP_NO_CONTENT);
