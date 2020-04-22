@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Commands\FlowDestroyCommand;
 use App\Commands\FlowStoreCommand;
+use App\Commands\FlowUpdateCommand;
 use App\Flow;
 use App\Queries\FlowShowQuery;
 use Illuminate\Database\Eloquent\Collection;
@@ -49,5 +51,37 @@ class FlowResourceService
         $flow = Flow::find($query->id);
 
         return $flow;
+    }
+
+    /**
+     * Update a Flow
+     *
+     * @param FlowUpdateCommand $command
+     *
+     * @return Flow
+     */
+    public function updateFlow(FlowUpdateCommand $command)
+    {
+        $flow = Flow::find($command->id);
+        $flow->title = $command->title;
+        $flow->save();
+
+        return $flow;
+    }
+
+    /**
+     * Delete a Flow
+     *
+     * @param FlowDestroyCommand $command
+     *
+     * @return bool|null
+     * @throws \Exception
+     */
+    public function deleteFlow(FlowDestroyCommand $command)
+    {
+        /** @var Flow $flow */
+        $flow = Flow::find($command->id);
+
+        return $flow->delete();
     }
 }
