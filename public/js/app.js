@@ -50902,7 +50902,7 @@ var files = __webpack_require__("./resources/js sync recursive \\.vue$/");
 
 files.keys().map(function (key) {
   return Vue.component(key.split('/').pop().split('.')[0], files(key)["default"]);
-}); // const ExampleComponent = require('./components/ExampleComponent.vue').default;
+});
 
 var App = __webpack_require__(/*! ./components/App.vue */ "./resources/js/components/App.vue")["default"];
 /**

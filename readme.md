@@ -5,8 +5,7 @@ Interval Training app
 
 ## Setup
 
-
-### create Database
+### Create Database
 ```
 $ vagrant ssh
 $ cd my project
@@ -57,7 +56,11 @@ $ php artisan migrate --env=testing
 
 ```
 
+End of Circadian Setup.
+
 ---
+
+
 
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 

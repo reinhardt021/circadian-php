@@ -12,5 +12,5 @@
 */
 
 Route::get('/', function () {
-    return view('app');
+    return view('app', ['title' => 'Circadian']);
 });
