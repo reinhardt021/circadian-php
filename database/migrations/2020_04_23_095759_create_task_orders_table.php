@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddFlowIdToTasks extends Migration
+class CreateTaskOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddFlowIdToTasks extends Migration
      */
     public function up()
     {
-        Schema::table('tasks', function (Blueprint $table) {
+        Schema::create('task_orders', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->integer('flow_id')->nullable();
+            $table->integer('position');
+            $table->integer('task_id')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddFlowIdToTasks extends Migration
      */
     public function down()
     {
-        Schema::table('tasks', function (Blueprint $table) {
-            $table->dropColumn('flow_id');
-        });
+        Schema::dropIfExists('task_orders');
     }
 }

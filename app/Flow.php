@@ -24,4 +24,12 @@ class Flow extends Model
     {
         return $this->hasMany(Task::class);
     }
+
+    /**
+     * Get the TaskOrders for the Flow
+     */
+    public function taskOrders()
+    {
+        return $this->hasMany(TaskOrder::class);
+    }
 }

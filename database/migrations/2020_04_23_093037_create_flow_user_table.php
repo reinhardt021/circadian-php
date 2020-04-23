@@ -15,8 +15,8 @@ class CreateFlowUserTable extends Migration
     {
         Schema::create('flow_user', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('flow_id');
-            $table->integer('user_id');
+            $table->integer('flow_id')->nullable();
+            $table->integer('user_id')->nullable();
             $table->timestamps();
         });
     }
