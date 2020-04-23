@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('app', ['title' => 'Circadian']);
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/app', function () {
+    return view('timer', ['title' => 'Circadian']);
 });

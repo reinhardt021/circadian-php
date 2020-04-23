@@ -38185,7 +38185,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "site", attrs: { id: "app" } },
+    { staticClass: "site", attrs: { id: "timer" } },
     [
       _c("AppTimer", {
         attrs: {
@@ -38255,7 +38255,7 @@ var render = function() {
       _c(
         "button",
         {
-          staticClass: "btn-sm",
+          staticClass: "button btn-sm",
           attrs: { title: "reset-timer" },
           on: { click: _vm.resetTimer }
         },
@@ -38286,7 +38286,7 @@ var render = function() {
       _c(
         "button",
         {
-          staticClass: "btn-sm",
+          staticClass: "button btn-sm",
           attrs: { title: "settings" },
           on: { click: _vm.openSettings }
         },
@@ -38366,7 +38366,7 @@ var render = function() {
         _c("div", { staticClass: "options" }, [
           _c(
             "button",
-            { staticClass: "settings-btn", on: { click: _vm.taskAdd } },
+            { staticClass: "button settings-btn", on: { click: _vm.taskAdd } },
             [
               _c(
                 "svg",
@@ -38393,7 +38393,10 @@ var render = function() {
           _vm._v(" "),
           _c(
             "button",
-            { staticClass: "settings-btn", on: { click: _vm.closeSettings } },
+            {
+              staticClass: "button settings-btn",
+              on: { click: _vm.closeSettings }
+            },
             [
               _c(
                 "svg",
@@ -38448,7 +38451,7 @@ var render = function() {
     _c(
       "button",
       {
-        staticClass: "remove-task",
+        staticClass: "button remove-task",
         on: {
           click: function($event) {
             return _vm.removeTask(_vm.task.id)
@@ -38610,7 +38613,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "btn-timer", on: { click: _vm.toggleTimer } },
+          { staticClass: "button btn-timer", on: { click: _vm.toggleTimer } },
           [
             _vm.isTimerActive
               ? _c("span", { staticClass: "flex-center" }, [
@@ -51011,7 +51014,7 @@ var App = __webpack_require__(/*! ./components/App.vue */ "./resources/js/compon
 
 
 var app = new Vue({
-  el: '#app',
+  el: '#timer',
   template: '<App/>',
   components: {
     App: App
@@ -51578,6 +51581,7 @@ function updateCurrentTask(currentTask, updatedTask) {
   currentTask.minutes = updatedTask.minutes;
   currentTask.seconds = updatedTask.seconds;
   currentTask.time = updatedTask.time;
+  currentTask.view = updatedTask.view;
   currentTask.nextTask = updatedTask.nextTask;
   currentTask.audioFile = updatedTask.audioFile;
   return currentTask;

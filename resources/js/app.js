@@ -28,7 +28,7 @@ const App = require('./components/App.vue').default;
  */
 
 const app = new Vue({
-    el: '#app',
+    el: '#timer',
     template: '<App/>',
     components: { App }
 });

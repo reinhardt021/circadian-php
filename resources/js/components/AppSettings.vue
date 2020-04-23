@@ -15,12 +15,12 @@
                 </div>
             </div>
             <div class="options">
-                <button class="settings-btn" @click='taskAdd'>
+                <button class="button settings-btn" @click='taskAdd'>
                     <svg width='24' height='22' xmlns='http://www.w3.org/2000/svg'>
                         <path fill='#333' fill-rule='evenodd' d='M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z'/>
                     </svg>
                 </button>
-                <button class="settings-btn" @click='closeSettings'>
+                <button class="button settings-btn" @click='closeSettings'>
                     <svg width='14' height='14' xmlns='http://www.w3.org/2000/svg'>
                         <path fill='#333' fill-rule='evenodd' d='M5.586 7L.636 2.05A1 1 0 0 1 2.05.636L7 5.586l4.95-4.95a1 1 0 0 1 1.414 1.414L8.414 7l4.95 4.95a1 1 0 0 1-1.414 1.414L7 8.414l-4.95 4.95A1 1 0 0 1 .636 11.95L5.586 7z'/>
                     </svg>

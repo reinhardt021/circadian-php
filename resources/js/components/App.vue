@@ -1,5 +1,5 @@
 <template>
-    <div id="app" class="site">
+    <div id="timer" class="site">
         <AppTimer
             :is-timer-active='isTimerActive'
             :current-task='currentTask'

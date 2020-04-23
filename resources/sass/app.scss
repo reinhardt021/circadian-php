@@ -18,7 +18,7 @@ html {
     box-sizing: border-box;
 }
 
-body {
+#app-timer {
     height: 100%;
     padding: 50px;
 
@@ -114,7 +114,7 @@ body {
 }
 
 /* CONTROLS */
-button {
+.button {
     padding: 0;
     color: white;
     font-family: inherit;
@@ -126,7 +126,7 @@ button {
     transition: border-color .15s ease;
 }
 
-button:not(:disabled) {
+.button:not(:disabled) {
     cursor: pointer;
 }
 

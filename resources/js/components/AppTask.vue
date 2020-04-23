@@ -1,6 +1,6 @@
 <template>
     <div class='task'>
-        <button class='remove-task' @click='removeTask(task.id)'>
+        <button class='button remove-task' @click='removeTask(task.id)'>
             <svg width='14' height='14' xmlns='http://www.w3.org/2000/svg'>
                 <path fill='grey' fill-rule='evenodd' d='M5.586 7L.636 2.05A1 1 0 0 1 2.05.636L7 5.586l4.95-4.95a1 1 0 0 1 1.414 1.414L8.414 7l4.95 4.95a1 1 0 0 1-1.414 1.414L7 8.414l-4.95 4.95A1 1 0 0 1 .636 11.95L5.586 7z'/>
             </svg>
