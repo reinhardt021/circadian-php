@@ -6,8 +6,9 @@
             </svg>
         </button>
         <div class='task-content'>
-            <span class='task-title' contenteditable='true' v-text='task.title' @blur='changeTitle'></span>
-            <div class='task-time' v-text='task.time'></div>
+            <div class='task-title' contenteditable='true' v-text='task.title' @blur='changeTitle'></div>
+            <TimeView :time='task.view'/>
+            <TimeView :time='timeFormat'/>
             <input class='task-input' type='range' min='0' max='24' data-type='task-hours' v-model='task.hours' @input='changeTime'/>
             <input class='task-input' type='range' min='0' max='59' data-type='task-minutes' v-model='task.minutes' @input='changeTime'/>
             <input class='task-input' type='range' min='0' max='59' data-type='task-seconds' v-model='task.seconds' @input='changeTime'/>
@@ -16,9 +17,19 @@
 </template>
 
 <script>
-    import { showTime } from '../helpers.js'
+    import TimeView from "./TimeView.vue";
+    import { showTime, formatTime } from '../helpers.js'
 
     export default {
+        data: function () {
+            return {
+                timeFormat: {
+                    hours: 'hh',
+                    minutes: 'mm',
+                    seconds: 'ss',
+                },
+            };
+        },
         props: {
             task: Object,
         },
@@ -41,8 +52,12 @@
                     [timePeriod]: Number(value),
                 };
                 newTask.time = showTime(newTask.hours, newTask.minutes, newTask.seconds);
+                newTask.view = formatTime(newTask.hours, newTask.minutes, newTask.seconds);
                 this.$emit('change-task', newTask);
             },
+        },
+        components: {
+            TimeView,
         },
     }
 </script>

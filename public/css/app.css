@@ -11096,6 +11096,15 @@ button:not(:disabled) {
   margin-bottom: 10px;
 }
 
+.time-hours,
+.time-seconds {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.time-minutes {
+  color: rgba(0, 0, 0, 0.5);
+}
+
 .remove-task {
   position: absolute;
   float: right;

@@ -1962,6 +1962,7 @@ var templateTask = {
   minutes: 0,
   seconds: 0,
   time: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_5__["showTime"])(0, 0, 0),
+  view: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_5__["formatTime"])(0, 0, 0),
   nextTask: null,
   audioFile: ''
 };
@@ -1995,6 +1996,7 @@ var appState = {
     firstTask: task01.id
   }, task01, {
     time: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_5__["showTime"])(task01.hours, task01.minutes, task01.seconds),
+    view: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_5__["formatTime"])(task01.hours, task01.minutes, task01.seconds),
     nextTask: task02.id,
     timer: null,
     // used to keep track of interval of counting down
@@ -2010,12 +2012,15 @@ var appState = {
   },
   tasks: (_tasks = {}, _defineProperty(_tasks, task01.id, _objectSpread({}, task01, {
     time: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_5__["showTime"])(task01.hours, task01.minutes, task01.seconds),
+    view: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_5__["formatTime"])(task01.hours, task01.minutes, task01.seconds),
     nextTask: task02.id
   })), _defineProperty(_tasks, task02.id, _objectSpread({}, task02, {
     time: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_5__["showTime"])(task02.hours, task02.minutes, task02.seconds),
+    view: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_5__["formatTime"])(task02.hours, task02.minutes, task02.seconds),
     nextTask: task03.id
   })), _defineProperty(_tasks, task03.id, _objectSpread({}, task03, {
     time: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_5__["showTime"])(task03.hours, task03.minutes, task03.seconds),
+    view: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_5__["formatTime"])(task03.hours, task03.minutes, task03.seconds),
     nextTask: null
   })), _tasks)
 };
@@ -2083,6 +2088,7 @@ function countdownTimeLoop(app) {
   }
 
   currentTask.time = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_5__["showTime"])(currentTask.hours, currentTask.minutes, currentTask.seconds);
+  currentTask.view = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_5__["formatTime"])(currentTask.hours, currentTask.minutes, currentTask.seconds);
 }
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2349,8 +2355,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers.js */ "./resources/js/helpers.js");
-/* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_helpers_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _TimeView_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TimeView.vue */ "./resources/js/components/TimeView.vue");
+/* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers.js */ "./resources/js/helpers.js");
+/* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_helpers_js__WEBPACK_IMPORTED_MODULE_1__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2374,8 +2381,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      timeFormat: {
+        hours: 'hh',
+        minutes: 'mm',
+        seconds: 'ss'
+      }
+    };
+  },
   props: {
     task: Object
   },
@@ -2398,9 +2416,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       var newTask = _objectSpread({}, this.task, _defineProperty({}, timePeriod, Number(value)));
 
-      newTask.time = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_0__["showTime"])(newTask.hours, newTask.minutes, newTask.seconds);
+      newTask.time = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_1__["showTime"])(newTask.hours, newTask.minutes, newTask.seconds);
+      newTask.view = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_1__["formatTime"])(newTask.hours, newTask.minutes, newTask.seconds);
       this.$emit('change-task', newTask);
     }
+  },
+  components: {
+    TimeView: _TimeView_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -2480,6 +2502,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TimeView.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TimeView.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    time: Object
   }
 });
 
@@ -38425,94 +38479,98 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "task-content" }, [
-      _c("span", {
-        staticClass: "task-title",
-        attrs: { contenteditable: "true" },
-        domProps: { textContent: _vm._s(_vm.task.title) },
-        on: { blur: _vm.changeTitle }
-      }),
-      _vm._v(" "),
-      _c("div", {
-        staticClass: "task-time",
-        domProps: { textContent: _vm._s(_vm.task.time) }
-      }),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.task.hours,
-            expression: "task.hours"
+    _c(
+      "div",
+      { staticClass: "task-content" },
+      [
+        _c("div", {
+          staticClass: "task-title",
+          attrs: { contenteditable: "true" },
+          domProps: { textContent: _vm._s(_vm.task.title) },
+          on: { blur: _vm.changeTitle }
+        }),
+        _vm._v(" "),
+        _c("TimeView", { attrs: { time: _vm.task.view } }),
+        _vm._v(" "),
+        _c("TimeView", { attrs: { time: _vm.timeFormat } }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.task.hours,
+              expression: "task.hours"
+            }
+          ],
+          staticClass: "task-input",
+          attrs: {
+            type: "range",
+            min: "0",
+            max: "24",
+            "data-type": "task-hours"
+          },
+          domProps: { value: _vm.task.hours },
+          on: {
+            input: _vm.changeTime,
+            __r: function($event) {
+              return _vm.$set(_vm.task, "hours", $event.target.value)
+            }
           }
-        ],
-        staticClass: "task-input",
-        attrs: {
-          type: "range",
-          min: "0",
-          max: "24",
-          "data-type": "task-hours"
-        },
-        domProps: { value: _vm.task.hours },
-        on: {
-          input: _vm.changeTime,
-          __r: function($event) {
-            return _vm.$set(_vm.task, "hours", $event.target.value)
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.task.minutes,
+              expression: "task.minutes"
+            }
+          ],
+          staticClass: "task-input",
+          attrs: {
+            type: "range",
+            min: "0",
+            max: "59",
+            "data-type": "task-minutes"
+          },
+          domProps: { value: _vm.task.minutes },
+          on: {
+            input: _vm.changeTime,
+            __r: function($event) {
+              return _vm.$set(_vm.task, "minutes", $event.target.value)
+            }
           }
-        }
-      }),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.task.minutes,
-            expression: "task.minutes"
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.task.seconds,
+              expression: "task.seconds"
+            }
+          ],
+          staticClass: "task-input",
+          attrs: {
+            type: "range",
+            min: "0",
+            max: "59",
+            "data-type": "task-seconds"
+          },
+          domProps: { value: _vm.task.seconds },
+          on: {
+            input: _vm.changeTime,
+            __r: function($event) {
+              return _vm.$set(_vm.task, "seconds", $event.target.value)
+            }
           }
-        ],
-        staticClass: "task-input",
-        attrs: {
-          type: "range",
-          min: "0",
-          max: "59",
-          "data-type": "task-minutes"
-        },
-        domProps: { value: _vm.task.minutes },
-        on: {
-          input: _vm.changeTime,
-          __r: function($event) {
-            return _vm.$set(_vm.task, "minutes", $event.target.value)
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.task.seconds,
-            expression: "task.seconds"
-          }
-        ],
-        staticClass: "task-input",
-        attrs: {
-          type: "range",
-          min: "0",
-          max: "59",
-          "data-type": "task-seconds"
-        },
-        domProps: { value: _vm.task.seconds },
-        on: {
-          input: _vm.changeTime,
-          __r: function($event) {
-            return _vm.$set(_vm.task, "seconds", $event.target.value)
-          }
-        }
-      })
-    ])
+        })
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = []
@@ -38652,6 +38710,45 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TimeView.vue?vue&type=template&id=75e20f7d&":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TimeView.vue?vue&type=template&id=75e20f7d& ***!
+  \***********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "time-view" }, [
+    _c("span", {
+      staticClass: "time-hours",
+      domProps: { textContent: _vm._s(_vm.time.hours) }
+    }),
+    _vm._v(":"),
+    _c("span", {
+      staticClass: "time-minutes",
+      domProps: { textContent: _vm._s(_vm.time.minutes) }
+    }),
+    _vm._v(":"),
+    _c("span", {
+      staticClass: "time-seconds",
+      domProps: { textContent: _vm._s(_vm.time.seconds) }
+    })
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -50850,7 +50947,8 @@ var map = {
 	"./components/AppSettings.vue": "./resources/js/components/AppSettings.vue",
 	"./components/AppTask.vue": "./resources/js/components/AppTask.vue",
 	"./components/AppTimer.vue": "./resources/js/components/AppTimer.vue",
-	"./components/ExampleComponent.vue": "./resources/js/components/ExampleComponent.vue"
+	"./components/ExampleComponent.vue": "./resources/js/components/ExampleComponent.vue",
+	"./components/TimeView.vue": "./resources/js/components/TimeView.vue"
 };
 
 
@@ -51381,6 +51479,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/TimeView.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/components/TimeView.vue ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TimeView_vue_vue_type_template_id_75e20f7d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TimeView.vue?vue&type=template&id=75e20f7d& */ "./resources/js/components/TimeView.vue?vue&type=template&id=75e20f7d&");
+/* harmony import */ var _TimeView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TimeView.vue?vue&type=script&lang=js& */ "./resources/js/components/TimeView.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TimeView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TimeView_vue_vue_type_template_id_75e20f7d___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TimeView_vue_vue_type_template_id_75e20f7d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/TimeView.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/TimeView.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/TimeView.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./TimeView.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TimeView.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/TimeView.vue?vue&type=template&id=75e20f7d&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/TimeView.vue?vue&type=template&id=75e20f7d& ***!
+  \*****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeView_vue_vue_type_template_id_75e20f7d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./TimeView.vue?vue&type=template&id=75e20f7d& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TimeView.vue?vue&type=template&id=75e20f7d&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeView_vue_vue_type_template_id_75e20f7d___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeView_vue_vue_type_template_id_75e20f7d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/helpers.js":
 /*!*********************************!*\
   !*** ./resources/js/helpers.js ***!
@@ -51394,6 +51561,14 @@ function ensurePadding(count) {
 
 function showTime(hours, minutes, seconds) {
   return "".concat(ensurePadding(hours), ":").concat(ensurePadding(minutes), ":").concat(ensurePadding(seconds));
+}
+
+function formatTime(hours, minutes, seconds) {
+  return {
+    hours: "".concat(ensurePadding(hours)),
+    minutes: "".concat(ensurePadding(minutes)),
+    seconds: "".concat(ensurePadding(seconds))
+  };
 }
 
 function updateCurrentTask(currentTask, updatedTask) {
@@ -51410,6 +51585,7 @@ function updateCurrentTask(currentTask, updatedTask) {
 
 module.exports = {
   showTime: showTime,
+  formatTime: formatTime,
   updateCurrentTask: updateCurrentTask
 };
 

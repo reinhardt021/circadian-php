@@ -31,7 +31,7 @@
     import WindMp3 from '../../audio/Wind-Mark_DiAngelo.mp3'
     import MetalGongMp3 from '../../audio/Metal_Gong-Dianakc.mp3'
 
-    import { showTime, updateCurrentTask } from '../helpers.js'
+    import { showTime, formatTime, updateCurrentTask } from '../helpers.js'
 
     const templateTask = {
         title: 'New Task',
@@ -39,6 +39,7 @@
         minutes: 0,
         seconds: 0,
         time: showTime(0, 0, 0),
+        view: formatTime(0, 0, 0),
         nextTask: null,
         audioFile: '',
     };
@@ -74,6 +75,7 @@
             firstTask: task01.id,
             ...task01,
             time: showTime(task01.hours, task01.minutes, task01.seconds),
+            view: formatTime(task01.hours, task01.minutes, task01.seconds),
             nextTask: task02.id,
             timer: null, // used to keep track of interval of counting down
             audio: null, // used to keep track of Audio files being played
@@ -91,16 +93,19 @@
             [task01.id]: {
                 ...task01,
                 time: showTime(task01.hours, task01.minutes, task01.seconds),
+                view: formatTime(task01.hours, task01.minutes, task01.seconds),
                 nextTask: task02.id,
             },
             [task02.id]: {
                 ...task02,
                 time: showTime(task02.hours, task02.minutes, task02.seconds),
+                view: formatTime(task02.hours, task02.minutes, task02.seconds),
                 nextTask: task03.id,
             },
             [task03.id]: {
                 ...task03,
                 time: showTime(task03.hours, task03.minutes, task03.seconds),
+                view: formatTime(task03.hours, task03.minutes, task03.seconds),
                 nextTask: null,
             },
         },
@@ -168,6 +173,7 @@
         }
 
         currentTask.time = showTime(currentTask.hours, currentTask.minutes, currentTask.seconds);
+        currentTask.view = formatTime(currentTask.hours, currentTask.minutes, currentTask.seconds);
     }
 
     export default {
