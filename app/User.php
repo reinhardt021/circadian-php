@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * The Flows that belong to the User
+     */
+    public function flows()
+    {
+        return $this->belongsToMany(Flow::class);
+    }
 }
