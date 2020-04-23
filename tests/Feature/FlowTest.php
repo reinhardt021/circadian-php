@@ -11,8 +11,6 @@ class FlowTest extends TestCase
 {
     use RefreshDatabase;
 
-    // todo: create a separate test database with seeded data to test full features .env.test
-
     /**
      * A test for the GET Flow resources API
      */

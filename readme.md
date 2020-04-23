@@ -10,10 +10,15 @@ Interval Training app
 ```
 $ vagrant ssh
 $ cd my project
-
 $ mysql
+
+# see a list of databases
 > show databases;
+
+# select a database in interact with
 > use <database-name>;
+
+# to see the tables in the database
 > show tables;
 
 # create database for testing
@@ -26,14 +31,20 @@ $ mysql
 ### Create .env files
 ```
 # create .env file
-# & update .env file with database credentials
-# *this is essential part*
 $ cp .env.example .env
+
+# go & update .env file with database credentials
+# *this is an ESSENTIAL part*
+$ vi .env
 
 # create .env.testing file
 # this is needed to run phpunit 
 # without damaging main DB
-$ cp .env.example .env.testing
+$ cp .env .env.testing
+
+# go & update .env file with database credentials
+$ vi .env.testing
+> DB_DATABASE=testing
 ```
 
 ### Run migrations on Databases
