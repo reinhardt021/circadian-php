@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Flow extends Model
@@ -12,7 +14,7 @@ class Flow extends Model
     /**
      * The Users that belong to the Flow
      */
-    public function users()
+    public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
     }
@@ -20,7 +22,7 @@ class Flow extends Model
     /**
      * Get the Tasks for the Flow
      */
-    public function tasks()
+    public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
     }
@@ -28,7 +30,7 @@ class Flow extends Model
     /**
      * Get the TaskOrders for the Flow
      */
-    public function taskOrders()
+    public function taskOrders(): HasMany
     {
         return $this->hasMany(TaskOrder::class);
     }

@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Task extends Model
@@ -12,7 +14,7 @@ class Task extends Model
     /**
      * Get the Flow that owns the Task
      */
-    public function flow()
+    public function flow(): BelongsTo
     {
         return $this->belongsTo(Flow::class);
     }
@@ -20,7 +22,7 @@ class Task extends Model
     /**
      * Get the TaskOrder associated to the Task
      */
-    public function taskOrder()
+    public function taskOrder(): HasOne
     {
         return $this->hasOne(TaskOrder::class, 'task_id', 'id');
     }

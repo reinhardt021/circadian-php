@@ -23,10 +23,8 @@ class FlowController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
         // todo: use the request to get the User in the session >> do in Query DTO
         // todo: use fractal / transformer
@@ -41,12 +39,8 @@ class FlowController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $command = FlowStoreCommand::buildFromRequest($request);
 
@@ -61,12 +55,8 @@ class FlowController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
      */
-    public function show(Request $request)
+    public function show(Request $request): JsonResponse
     {
         $query = FlowShowQuery::buildFromRequest($request);
 
@@ -81,12 +71,8 @@ class FlowController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
      */
-    public function update(Request $request)
+    public function update(Request $request): JsonResponse
     {
         $command = FlowUpdateCommand::buildFromRequest($request);
 
@@ -102,12 +88,9 @@ class FlowController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Request $request
-     *
-     * @return JsonResponse
      * @throws \Exception
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request): JsonResponse
     {
         $this->service->deleteFlow(FlowDestroyCommand::buildFromRequest($request));
 
