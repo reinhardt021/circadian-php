@@ -19,7 +19,6 @@ class TaskOrder extends Model
      */
     public function task()
     {
-        // todo: need to double check the relation here can grab the entity
         return $this->belongsTo(Task::class, 'task_id', 'id');
     }
 }

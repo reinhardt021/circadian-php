@@ -22,7 +22,6 @@ class Task extends Model
      */
     public function taskOrder()
     {
-        // todo: need to double check the relation here can grab the entity
-        return $this->hasOne(Task::class, 'id', 'task_id');
+        return $this->hasOne(TaskOrder::class, 'task_id', 'id');
     }
 }
