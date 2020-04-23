@@ -5,21 +5,44 @@ Interval Training app
 
 ## Setup
 
+
+### create Database
 ```
 $ vagrant ssh
 $ cd my project
 
 $ mysql
 > show databases;
-> use database-name;
+> use <database-name>;
 > show tables;
-> CREATE database circadian;
+
+# create database for testing
+> CREATE database testing;
+
+# to exit mysql
 > exit
+```
 
-# then update the .env file with the database credentials
-# this is essential part
+### Create .env files
+```
+# create .env file
+# & update .env file with database credentials
+# *this is essential part*
+$ cp .env.example .env
 
-$ php artisan migrate once the database is created
+# create .env.testing file
+# this is needed to run phpunit 
+# without damaging main DB
+$ cp .env.example .env.testing
+```
+
+### Run migrations on Databases
+```
+# run migrations on DB for updated tables
+$ php artisan migrate
+
+# run migrations on Test DB
+$ php artisan migrate --env=testing
 
 ```
 
