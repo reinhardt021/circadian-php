@@ -16,4 +16,12 @@ class Flow extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    /**
+     * Get the Tasks for the Flow
+     */
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
 }
