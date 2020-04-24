@@ -12,12 +12,12 @@ class FlowSeeder extends Seeder
     {
         DB::table('flows')->insert([
             [
-                'title' => 'pomodoro',
+                'title' => 'stretch',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'title' => 'stretch',
+                'title' => 'exercise',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],

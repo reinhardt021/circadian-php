@@ -12,25 +12,25 @@ class TaskSeeder extends Seeder
     {
         DB::table('tasks')->insert([
             [
-                'title' => 'warm up',
+                'title' => 'upper body',
                 'hours' => 0,
-                'minutes' => 0,
-                'seconds' => 15,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'title' => 'WORK',
-                'hours' => 0,
-                'minutes' => 25,
+                'minutes' => 20,
                 'seconds' => 0,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'title' => 'break',
+                'title' => 'core',
                 'hours' => 0,
                 'minutes' => 15,
+                'seconds' => 0,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'title' => 'lower body',
+                'hours' => 0,
+                'minutes' => 20,
                 'seconds' => 0,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),

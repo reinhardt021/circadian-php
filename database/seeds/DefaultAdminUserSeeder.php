@@ -10,7 +10,7 @@ class DefaultAdminUserSeeder extends Seeder
     public function run(): void
     {
         DB::table('users')->insert([
-            'name' => 'Admin',
+            'name' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => '$2y$10$9VSHuFu3A5yNjLU5qb/TouGE.SYMuKcQ1b4hqgff.lsVHbsD3nxk6',
         ]);
