@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Commands\TaskDestroyCommand;
 use App\Commands\TaskStoreCommand;
 use App\Commands\TaskUpdateCommand;
+use App\Flow;
 use App\Queries\TaskIndexQuery;
 use App\Queries\TaskShowQuery;
 use App\Task;
@@ -21,8 +22,7 @@ class TaskResourceService
      */
     public function getTasks(TaskIndexQuery $query)
     {
-        // todo: update to use the flowId to narrow down tasks returned
-        $tasks = Task::all();
+        $tasks = Task::where('flow_id', $query->flowId)->get();
 
         return $tasks;
     }
@@ -32,13 +32,16 @@ class TaskResourceService
      */
     public function postTask(TaskStoreCommand $command): Task
     {
-        // todo: update to use the flowId to narrow down Flow to add tasks to
+        /** @var Flow $flow */
+        $flow = Flow::find($command->flowId);
+
         $task = new Task();
         $task->title = $command->title;
         $task->hours = $command->hours;
         $task->minutes = $command->minutes;
         $task->seconds = $command->seconds;
         $task->save();
+        $flow->tasks()->save($task);
 
         return $task;
     }
@@ -48,8 +51,7 @@ class TaskResourceService
      */
     public function getTask(TaskShowQuery $query): Task
     {
-        // todo: update to use the flowId to narrow down Flow to add tasks to
-        $task = Task::find($query->taskId);
+        $task = Task::where('id', $query->taskId)->where('flow_id', $query->flowId)->first();
 
         return $task;
     }
