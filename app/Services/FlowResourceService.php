@@ -16,7 +16,7 @@ class FlowResourceService
      *
      * @return Flow[]|Collection
      */
-    public function getFlows()
+    public function getFlows(): Collection
     {
         $flows = Flow::all();
 

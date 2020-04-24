@@ -16,11 +16,9 @@ class TaskResourceService
     /**
      * Get a list of the Tasks for a Flow
      *
-     * @param TaskIndexQuery $query
-     *
      * @return Task[]|Collection
      */
-    public function getTasks(TaskIndexQuery $query)
+    public function getTasks(TaskIndexQuery $query): Collection
     {
         $tasks = Task::where('flow_id', $query->flowId)->get();
 

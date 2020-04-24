@@ -11,6 +11,13 @@ class FlowTest extends TestCase
 {
     use RefreshDatabase;
 
+    private array $expectedFlowStructure = [
+        'id',
+        'title',
+        'created_at',
+        'updated_at',
+    ];
+
     /**
      * A test for the GET Flow resources API
      */
@@ -19,7 +26,12 @@ class FlowTest extends TestCase
         // ARRANGE
         $flows = \factory(Flow::class, 3)->create();
         $uri = '/api/flows';
-        $expectedStructure = ['message', 'data'];
+        $expectedStructure = [
+            'message',
+            'data' => [
+                '*' => $this->expectedFlowStructure,
+            ],
+        ];
 
         // ACT
         $response = $this->get($uri);
@@ -43,12 +55,7 @@ class FlowTest extends TestCase
         ];
         $expectedStructure = [
             'message',
-            'data' => [
-                'id',
-                'created_at',
-                'updated_at',
-                'title',
-            ],
+            'data' => $this->expectedFlowStructure,
         ];
 
         // ACT
@@ -75,13 +82,7 @@ class FlowTest extends TestCase
         $uri = '/api/flows/' . $flow->id;
         $expectedStructure = [
             'message',
-            'data' => [
-                'id',
-                'title',
-                'created_at',
-                'updated_at',
-                'deleted_at',
-            ],
+            'data' => $this->expectedFlowStructure,
         ];
 
         // ACT
@@ -108,13 +109,7 @@ class FlowTest extends TestCase
         ];
         $expectedStructure = [
             'message',
-            'data' => [
-                'id',
-                'title',
-                'created_at',
-                'updated_at',
-                'deleted_at',
-            ],
+            'data' => $this->expectedFlowStructure,
         ];
 
         // ACT
