@@ -161,10 +161,13 @@ class TaskTest extends TestCase
     public function testTaskDestroy()
     {
         // ARRANGE
-        // todo: create Flow for tasks to attach to
         $tasks = \factory(Task::class, 1)->create();
+
+        /** @var Flow $flow */
+        $flow = \factory(Flow::class)->create();
+        $flow->tasks()->saveMany($tasks);
         $task = $tasks[0];
-        $uri = '/api/flows/1/tasks/' . $task->id;
+        $uri = "/api/flows/{$flow->id}/tasks/{$task->id}";
 
         // ACT
         $response = $this->delete($uri);
