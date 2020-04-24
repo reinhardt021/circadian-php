@@ -12,6 +12,17 @@ class TaskTest extends TestCase
 {
     use RefreshDatabase;
 
+    private array $expectedTaskStructure = [
+        'id',
+        'title',
+        'hours',
+        'minutes',
+        'seconds',
+        'created_at',
+        'updated_at',
+        'flow_id',
+    ];
+
     /**
      * A Task Index API test.
      *
@@ -26,7 +37,12 @@ class TaskTest extends TestCase
         $flow = \factory(Flow::class)->create();
         $flow->tasks()->saveMany($tasks);
         $uri = "/api/flows/{$flow->id}/tasks";
-        $expectedStructure = ['message', 'data'];
+        $expectedStructure = [
+            'message',
+            'data' => [
+                '*' => $this->expectedTaskStructure,
+            ],
+        ];
 
         // ACT
         $response = $this->get($uri);
@@ -36,6 +52,10 @@ class TaskTest extends TestCase
         $response->assertStatus(Response::HTTP_OK);
         $response->assertJsonStructure($expectedStructure);
         $this->assertCount(\count($tasks), $json['data']);
+        foreach ($json['data'] as $task)
+        {
+            $this->assertEquals($flow->id, $task['flow_id']);
+        }
     }
 
     /**
@@ -46,8 +66,9 @@ class TaskTest extends TestCase
     public function testTaskStore()
     {
         // ARRANGE
-        // todo: create Flow for tasks to attach to
-        $uri = '/api/flows/1/tasks';
+        /** @var Flow $flow */
+        $flow = \factory(Flow::class)->create();
+        $uri = "/api/flows/{$flow->id}/tasks";
         $data = [
             'title' => 'New Flow API Test',
             'hours' => 1,
@@ -56,12 +77,7 @@ class TaskTest extends TestCase
         ];
         $expectedStructure = [
             'message',
-            'data' => [
-                'id',
-                'created_at',
-                'updated_at',
-                'title',
-            ],
+            'data' => $this->expectedTaskStructure,
         ];
 
         // ACT
@@ -75,6 +91,7 @@ class TaskTest extends TestCase
             $data['title'],
             $json['data']['title']
         );
+        $this->assertEquals($flow->id, $json['data']['flow_id']);
     }
 
     public function testTaskShow()
@@ -86,13 +103,7 @@ class TaskTest extends TestCase
         $uri = '/api/flows/1/tasks/' . $task->id;
         $expectedStructure = [
             'message',
-            'data' => [
-                'id',
-                'title',
-                'created_at',
-                'updated_at',
-                'deleted_at',
-            ],
+            'data' => $this->expectedTaskStructure,
         ];
 
         // ACT
@@ -118,13 +129,7 @@ class TaskTest extends TestCase
         ];
         $expectedStructure = [
             'message',
-            'data' => [
-                'id',
-                'title',
-                'created_at',
-                'updated_at',
-                'deleted_at',
-            ],
+            'data' => $this->expectedTaskStructure,
         ];
 
         // ACT
