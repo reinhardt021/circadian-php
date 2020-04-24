@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Flow;
 use App\Task;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
@@ -19,9 +20,12 @@ class TaskTest extends TestCase
     public function testTaskIndex()
     {
         // ARRANGE
-        // todo: create Flow for tasks to attach to
-        $tasks = factory(Task::class, 3)->create();
-        $uri = '/api/flows/1/tasks';
+        $tasks = \factory(Task::class, 3)->create();
+
+        /** @var Flow $flow */
+        $flow = \factory(Flow::class)->create();
+        $flow->tasks()->saveMany($tasks);
+        $uri = "/api/flows/{$flow->id}/tasks";
         $expectedStructure = ['message', 'data'];
 
         // ACT
@@ -77,7 +81,7 @@ class TaskTest extends TestCase
     {
         // ARRANGE
         // todo: create Flow for tasks to attach to
-        $tasks = factory(Task::class, 1)->create();
+        $tasks = \factory(Task::class, 1)->create();
         $task = $tasks[0];
         $uri = '/api/flows/1/tasks/' . $task->id;
         $expectedStructure = [
@@ -105,7 +109,7 @@ class TaskTest extends TestCase
     {
         // ARRANGE
         // todo: create Flow for tasks to attach to
-        $tasks = factory(Task::class, 1)->create();
+        $tasks = \factory(Task::class, 1)->create();
         $task = $tasks[0];
         $uri = '/api/flows/1/tasks/' . $task->id;
         $data = [
@@ -145,7 +149,7 @@ class TaskTest extends TestCase
     {
         // ARRANGE
         // todo: create Flow for tasks to attach to
-        $tasks = factory(Task::class, 1)->create();
+        $tasks = \factory(Task::class, 1)->create();
         $task = $tasks[0];
         $uri = '/api/flows/1/tasks/' . $task->id;
 

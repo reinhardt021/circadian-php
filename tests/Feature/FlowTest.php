@@ -17,7 +17,7 @@ class FlowTest extends TestCase
     public function testFlowIndex()
     {
         // ARRANGE
-        $flows = factory(Flow::class, 3)->create();
+        $flows = \factory(Flow::class, 3)->create();
         $uri = '/api/flows';
         $expectedStructure = ['message', 'data'];
 
@@ -70,7 +70,7 @@ class FlowTest extends TestCase
     public function testFlowShow()
     {
         // ARRANGE
-        $flows = factory(Flow::class, 1)->create();
+        $flows = \factory(Flow::class, 1)->create();
         $flow = $flows[0];
         $uri = '/api/flows/' . $flow->id;
         $expectedStructure = [
@@ -100,7 +100,7 @@ class FlowTest extends TestCase
     public function testFlowUpdate()
     {
         // ARRANGE
-        $flows = factory(Flow::class, 1)->create();
+        $flows = \factory(Flow::class, 1)->create();
         $flow = $flows[0];
         $uri = '/api/flows/' . $flow->id;
         $data = [
@@ -134,7 +134,7 @@ class FlowTest extends TestCase
     public function testFlowDestroy()
     {
         // ARRANGE
-        $flows = factory(Flow::class, 1)->create();
+        $flows = \factory(Flow::class, 1)->create();
         $flow = $flows[0];
         $uri = '/api/flows/' . $flow->id;
 
