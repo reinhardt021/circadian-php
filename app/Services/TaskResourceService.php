@@ -61,12 +61,14 @@ class TaskResourceService
      */
     public function updateTask(TaskUpdateCommand $command): Task
     {
-        // todo: update to use the flowId to narrow down Flow to add tasks to
-        $task = Task::find($command->taskId);
+        $task = Task::where('id', $command->taskId)
+            ->where('flow_id', $command->flowId)
+            ->first();
         $task->title = $command->title ?: $task->title;
         $task->hours = $command->hours ?: $task->hours;
         $task->minutes = $command->minutes ?: $task->minutes;
         $task->seconds = $command->seconds ?: $task->seconds;
+        $task->save();
 
         return $task;
     }
