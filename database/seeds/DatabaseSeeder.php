@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
              DefaultAdminUserSeeder::class,
              FlowSeeder::class,
              TaskSeeder::class,
+             ExamplePomodoroUserFlowTasksSeeder::class,
 //             UsersTableSeeder::class,
          ]);
     }

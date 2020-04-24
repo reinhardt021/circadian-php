@@ -48,7 +48,7 @@ class ExamplePomodoroUserFlowTasksSeeder extends Seeder
             ],
         ];
 
-        \collect($newTasks)->map(function ($newTask, $key) use ($flow) {
+        \collect($newTasks)->each(function ($newTask, $key) use ($flow) {
             /** @var Task $task */
             $task = \factory(Task::class)->create($newTask);
             $taskOrder = \factory(TaskOrder::class)->create(['position' => ($key + 1)]);
@@ -57,8 +57,6 @@ class ExamplePomodoroUserFlowTasksSeeder extends Seeder
             $task->taskOrder()->save($taskOrder);
             $flow->taskOrders()->save($taskOrder);
             $flow->tasks()->save($task);
-
-            return $task;
-        })->toArray();
+        });
     }
 }
