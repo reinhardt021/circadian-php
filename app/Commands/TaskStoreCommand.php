@@ -12,7 +12,10 @@ class TaskStoreCommand
     public int $minutes;
     public int $seconds;
 
-    public static function buildFromRequest(Request $request)
+    /**
+     * Build Command from Request
+     */
+    public static function buildFromRequest(Request $request): self
     {
         $command = new self();
         $command->flowId = $request->flow;

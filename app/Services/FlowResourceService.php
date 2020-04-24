@@ -25,12 +25,8 @@ class FlowResourceService
 
     /**
      * Creating a new Flow object
-     *
-     * @param FlowStoreCommand $command
-     *
-     * @return Flow
      */
-    public function postFlow(FlowStoreCommand $command)
+    public function postFlow(FlowStoreCommand $command): Flow
     {
         $flow = new Flow();
         $flow->title = $command->title;
@@ -41,12 +37,8 @@ class FlowResourceService
 
     /**
      * Grabbing a single Flow object
-     *
-     * @param FlowShowQuery $query
-     *
-     * @return Flow
      */
-    public function getFlow(FlowShowQuery $query)
+    public function getFlow(FlowShowQuery $query): Flow
     {
         // todo: consider Repository pattern for better testability
         // if Repo pattern used then can combine this with getFlows() just diff Criteria passed
@@ -57,12 +49,8 @@ class FlowResourceService
 
     /**
      * Update a Flow
-     *
-     * @param FlowUpdateCommand $command
-     *
-     * @return Flow
      */
-    public function updateFlow(FlowUpdateCommand $command)
+    public function updateFlow(FlowUpdateCommand $command): Flow
     {
         $flow = Flow::find($command->id);
         $flow->title = $command->title;
@@ -74,12 +62,9 @@ class FlowResourceService
     /**
      * Delete a Flow
      *
-     * @param FlowDestroyCommand $command
-     *
-     * @return bool|null
      * @throws \Exception
      */
-    public function deleteFlow(FlowDestroyCommand $command)
+    public function deleteFlow(FlowDestroyCommand $command): ?bool
     {
         /** @var Flow $flow */
         $flow = Flow::find($command->id);

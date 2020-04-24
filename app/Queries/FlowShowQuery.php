@@ -10,12 +10,8 @@ class FlowShowQuery
 
     /**
      * Create Query from Request
-     *
-     * @param Request $request
-     *
-     * @return self
      */
-    public static function buildFromRequest(Request $request)
+    public static function buildFromRequest(Request $request): self
     {
         $query = new self();
         $query->id = $request->flow;

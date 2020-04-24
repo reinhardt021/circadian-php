@@ -24,12 +24,8 @@ class TaskController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
      */
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse
     {
         $query = TaskIndexQuery::buildFromRequest($request);
 
@@ -44,12 +40,8 @@ class TaskController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $command = TaskStoreCommand::buildFromRequest($request);
 
@@ -64,12 +56,8 @@ class TaskController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
      */
-    public function show(Request $request)
+    public function show(Request $request): JsonResponse
     {
         $query = TaskShowQuery::buildFromRequest($request);
 
@@ -84,12 +72,8 @@ class TaskController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
      */
-    public function update(Request $request)
+    public function update(Request $request): JsonResponse
     {
         $command = TaskUpdateCommand::buildFromRequest($request);
 
@@ -105,12 +89,9 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Request $request
-     *
-     * @return JsonResponse
      * @throws \Exception
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request): JsonResponse
     {
         $this->service->deleteTask(TaskDestroyCommand::buildFromRequest($request));
 

@@ -9,7 +9,10 @@ class TaskShowQuery
     public int $flowId;
     public int $taskId;
 
-    public static function buildFromRequest(Request $request)
+    /**
+     * Build Query from Request
+     */
+    public static function buildFromRequest(Request $request): self
     {
         $query = new self();
         $query->flowId = $request->flow;

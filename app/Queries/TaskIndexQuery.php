@@ -10,12 +10,8 @@ class TaskIndexQuery
 
     /**
      * Create a Query object from a Request object
-     *
-     * @param Request $request
-     *
-     * @return self
      */
-    public static function buildFromRequest(Request $request)
+    public static function buildFromRequest(Request $request): self
     {
         $query = new self();
         $query->flowId = $request->flow;

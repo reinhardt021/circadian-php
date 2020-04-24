@@ -29,12 +29,8 @@ class TaskResourceService
 
     /**
      * Create a new Task
-     *
-     * @param TaskStoreCommand $command
-     *
-     * @return Task
      */
-    public function postTask(TaskStoreCommand $command)
+    public function postTask(TaskStoreCommand $command): Task
     {
         // todo: update to use the flowId to narrow down Flow to add tasks to
         $task = new Task();
@@ -49,12 +45,8 @@ class TaskResourceService
 
     /**
      * Get the single Task
-     *
-     * @param TaskShowQuery $query
-     *
-     * @return Task
      */
-    public function getTask(TaskShowQuery $query)
+    public function getTask(TaskShowQuery $query): Task
     {
         // todo: update to use the flowId to narrow down Flow to add tasks to
         $task = Task::find($query->taskId);
@@ -64,12 +56,8 @@ class TaskResourceService
 
     /**
      * Update the given Task
-     *
-     * @param TaskUpdateCommand $command
-     *
-     * @return Task
      */
-    public function updateTask(TaskUpdateCommand $command)
+    public function updateTask(TaskUpdateCommand $command): Task
     {
         // todo: update to use the flowId to narrow down Flow to add tasks to
         $task = Task::find($command->taskId);
@@ -84,12 +72,9 @@ class TaskResourceService
     /**
      * Delete a Task
      *
-     * @param TaskDestroyCommand $command
-     *
-     * @return bool|null
      * @throws \Exception
      */
-    public function deleteTask(TaskDestroyCommand $command)
+    public function deleteTask(TaskDestroyCommand $command): ?bool
     {
         // todo: update to use the flowId to narrow down task returned
         $task = Task::find($command->taskId);

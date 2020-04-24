@@ -15,12 +15,8 @@ class TaskUpdateCommand
 
     /**
      * Build Command from Request
-     *
-     * @param Request $request
-     *
-     * @return self
      */
-    public static function buildFromRequest(Request $request)
+    public static function buildFromRequest(Request $request): self
     {
         $command = new self();
         $command->flowId = $request->flow;
