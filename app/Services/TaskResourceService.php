@@ -80,8 +80,9 @@ class TaskResourceService
      */
     public function deleteTask(TaskDestroyCommand $command): ?bool
     {
-        // todo: update to use the flowId to narrow down task returned
-        $task = Task::find($command->taskId);
+        $task = Task::where('id', $command->taskId)
+            ->where('flow_id', $command->flowId)
+            ->first();
 
         return $task->delete();
     }
