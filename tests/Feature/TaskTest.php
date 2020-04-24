@@ -97,10 +97,13 @@ class TaskTest extends TestCase
     public function testTaskShow()
     {
         // ARRANGE
-        // todo: create Flow for tasks to attach to
         $tasks = \factory(Task::class, 1)->create();
+
+        /** @var Flow $flow */
+        $flow = \factory(Flow::class)->create();
+        $flow->tasks()->saveMany($tasks);
         $task = $tasks[0];
-        $uri = '/api/flows/1/tasks/' . $task->id;
+        $uri = "/api/flows/{$flow->id}/tasks/{$task->id}";
         $expectedStructure = [
             'message',
             'data' => $this->expectedTaskStructure,
@@ -114,15 +117,19 @@ class TaskTest extends TestCase
         $response->assertStatus(Response::HTTP_OK);
         $response->assertJsonStructure($expectedStructure);
         $this->assertEquals($task->id, $json['data']['id']);
+        $this->assertEquals($flow->id, $json['data']['flow_id']);
     }
 
     public function testTaskUpdate()
     {
         // ARRANGE
-        // todo: create Flow for tasks to attach to
         $tasks = \factory(Task::class, 1)->create();
+
+        /** @var Flow $flow */
+        $flow = \factory(Flow::class)->create();
+        $flow->tasks()->saveMany($tasks);
         $task = $tasks[0];
-        $uri = '/api/flows/1/tasks/' . $task->id;
+        $uri = "/api/flows/{$flow->id}/tasks/{$task->id}";
         $data = [
             'title' => 'Updated Flow API Test',
             'minutes' => 13,
@@ -140,13 +147,14 @@ class TaskTest extends TestCase
         $response->assertStatus(Response::HTTP_OK);
         $response->assertJsonStructure($expectedStructure);
         $this->assertEquals($task->id, $json['data']['id']);
-        $this->assertEquals($data['title'], $json['data']['title']);
+        $this->assertEquals($flow->id, $json['data']['flow_id']);
 
-        // test that the Task.hours stay the same
-        $this->assertEquals($task->hours, $json['data']['hours']);
+        // test that the Task.title & Task.minutes are updated
+        $this->assertEquals($data['title'], $json['data']['title']);
         $this->assertEquals($data['minutes'], $json['data']['minutes']);
 
-        // test that the Task.seconds stay the same
+        // test that the Task.hours & Task.seconds stay the same
+        $this->assertEquals($task->hours, $json['data']['hours']);
         $this->assertEquals($task->seconds, $json['data']['seconds']);
     }
 
