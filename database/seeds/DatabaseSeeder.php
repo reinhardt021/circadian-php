@@ -10,10 +10,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
          $this->call([
+             ExamplePomodoroUserFlowTasksSeeder::class,
              DefaultAdminUserSeeder::class,
              FlowSeeder::class,
              TaskSeeder::class,
-             ExamplePomodoroUserFlowTasksSeeder::class,
 //             UsersTableSeeder::class,
          ]);
     }
