@@ -28,6 +28,9 @@
     import AppControls from './AppControls.vue'
     import AppSettings from './AppSettings.vue'
 
+    import { RepositoryFactory } from '../repositories/RepositoryFactory.js'
+    const FlowRepository = RepositoryFactory.get('flows');
+
     import WindMp3 from '../../audio/Wind-Mark_DiAngelo.mp3'
     import MetalGongMp3 from '../../audio/Metal_Gong-Dianakc.mp3'
 
@@ -88,7 +91,7 @@
             loopTasks: true,
             timerAudioFile: MetalGongMp3,
         },
-
+        
         tasks: {
             [task01.id]: {
                 ...task01,
@@ -180,7 +183,14 @@
         data: function () {
             return appState;
         },
+        created() {
+            this.fetch();
+        },
         methods: {
+            async fetch () {
+                const response = await FlowRepository.get();
+                console.log('>>> response', response);
+            },
             toggleTimer() {
                 const self = this;
 
