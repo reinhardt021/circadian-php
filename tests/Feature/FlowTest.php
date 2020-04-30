@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Flow;
+use Illuminate\Support\Arr;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -12,8 +13,12 @@ class FlowTest extends TestCase
     use RefreshDatabase;
 
     private array $expectedFlowStructure = [
+        'type',
         'id',
-        'title',
+        'attributes' => [
+            'title',
+        ],
+        'relationships',
     ];
 
     /**
@@ -65,7 +70,7 @@ class FlowTest extends TestCase
         $response->assertJsonStructure($expectedStructure);
         $this->assertEquals(
             $data['title'],
-            $json['data']['title']
+            Arr::get($json, 'data.attributes.title')
         );
     }
 
@@ -90,7 +95,7 @@ class FlowTest extends TestCase
         //ASSERT
         $response->assertStatus(Response::HTTP_OK);
         $response->assertJsonStructure($expectedStructure);
-        $this->assertEquals($flow->id, $json['data']['id']);
+        $this->assertEquals($flow->id, Arr::get($json, 'data.id'));
     }
 
     /**
@@ -117,10 +122,10 @@ class FlowTest extends TestCase
         // ASSERT
         $response->assertStatus(Response::HTTP_OK);
         $response->assertJsonStructure($expectedStructure);
-        $this->assertEquals($flow->id, $json['data']['id']);
+        $this->assertEquals($flow->id, Arr::get($json, 'data.id'));
         $this->assertEquals(
             $data['title'],
-            $json['data']['title']
+            Arr::get($json, 'data.attributes.title')
         );
     }
 

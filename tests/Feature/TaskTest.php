@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Flow;
 use App\Task;
+use Illuminate\Support\Arr;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -13,14 +14,22 @@ class TaskTest extends TestCase
     use RefreshDatabase;
 
     private array $expectedTaskStructure = [
+        'type',
         'id',
-        'title',
-        'hours',
-        'minutes',
-        'seconds',
-        'created_at',
-        'updated_at',
-        'flow_id',
+        'attributes' => [
+            'title',
+            'hours',
+            'minutes',
+            'seconds',
+        ],
+        'relationships' => [
+            'flow' => [
+                'data' => [
+                    'type',
+                    'id',
+                ],
+            ],
+        ],
     ];
 
     /**
@@ -54,7 +63,7 @@ class TaskTest extends TestCase
         $this->assertCount(\count($tasks), $json['data']);
         foreach ($json['data'] as $task)
         {
-            $this->assertEquals($flow->id, $task['flow_id']);
+            $this->assertEquals($flow->id, Arr::get($task, 'relationships.flow.data.id'));
         }
     }
 
@@ -89,9 +98,9 @@ class TaskTest extends TestCase
         $response->assertJsonStructure($expectedStructure);
         $this->assertEquals(
             $data['title'],
-            $json['data']['title']
+            Arr::get($json, 'data.attributes.title')
         );
-        $this->assertEquals($flow->id, $json['data']['flow_id']);
+        $this->assertEquals($flow->id, Arr::get($json, 'data.relationships.flow.data.id'));
     }
 
     public function testTaskShow()
@@ -116,8 +125,8 @@ class TaskTest extends TestCase
         //ASSERT
         $response->assertStatus(Response::HTTP_OK);
         $response->assertJsonStructure($expectedStructure);
-        $this->assertEquals($task->id, $json['data']['id']);
-        $this->assertEquals($flow->id, $json['data']['flow_id']);
+        $this->assertEquals($task->id, Arr::get($json, 'data.id'));
+        $this->assertEquals($flow->id, Arr::get($json, 'data.relationships.flow.data.id'));
     }
 
     public function testTaskUpdate()
@@ -146,16 +155,16 @@ class TaskTest extends TestCase
         // ASSERT
         $response->assertStatus(Response::HTTP_OK);
         $response->assertJsonStructure($expectedStructure);
-        $this->assertEquals($task->id, $json['data']['id']);
-        $this->assertEquals($flow->id, $json['data']['flow_id']);
+        $this->assertEquals($task->id, Arr::get($json, 'data.id'));
+        $this->assertEquals($flow->id, Arr::get($json, 'data.relationships.flow.data.id'));
 
         // test that the Task.title & Task.minutes are updated
-        $this->assertEquals($data['title'], $json['data']['title']);
-        $this->assertEquals($data['minutes'], $json['data']['minutes']);
+        $this->assertEquals($data['title'], Arr::get($json, 'data.attributes.title'));
+        $this->assertEquals($data['minutes'], Arr::get($json, 'data.attributes.minutes'));
 
         // test that the Task.hours & Task.seconds stay the same
-        $this->assertEquals($task->hours, $json['data']['hours']);
-        $this->assertEquals($task->seconds, $json['data']['seconds']);
+        $this->assertEquals($task->hours, Arr::get($json, 'data.attributes.hours'));
+        $this->assertEquals($task->seconds, Arr::get($json, 'data.attributes.seconds'));
     }
 
     public function testTaskDestroy()
