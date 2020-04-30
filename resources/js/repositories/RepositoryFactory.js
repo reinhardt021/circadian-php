@@ -1,4 +1,4 @@
-import FlowRepository from "./FlowRepository";
+import FlowRepository from "./FlowRepository.js";
 
 const repositories = {
     flows: FlowRepository,

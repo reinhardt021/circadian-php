@@ -4,6 +4,7 @@ const resourceURI = '/flows';
 function singleResourceURI(resourceURI,id) {
     return `${resourceURI}/${id}`;
 }
+
 export default {
     get() {
         return Repository.get(resourceURI);

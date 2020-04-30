@@ -2117,6 +2117,7 @@ function countdownTimeLoop(app) {
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
+    //todo: findout proper styling for this to be consistent
     return appState;
   },
   created: function created() {
@@ -2124,8 +2125,11 @@ function countdownTimeLoop(app) {
   },
   methods: {
     fetch: function fetch() {
+      var _this = this;
+
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var response;
+        var _yield$FlowRepository, data;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2134,10 +2138,22 @@ function countdownTimeLoop(app) {
                 return FlowRepository.get();
 
               case 2:
-                response = _context.sent;
-                console.log('>>> response', response);
+                _yield$FlowRepository = _context.sent;
+                data = _yield$FlowRepository.data;
+                console.log('>>> data', data); // can probably do without this if given typehinting >> todo: typescript
 
-              case 4:
+                if (data.hasOwnProperty('data') && Array.isArray(data.data)) {
+                  data.data.reduce(function (flows, flow) {
+                    console.log('>>> flows', flows);
+                    console.log('>>> flow', flow);
+                    flows[flow.id] = flow;
+                    return flows;
+                  }, _this.flows);
+                }
+
+                console.log('>>> this.flows', _this.flows);
+
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -52432,6 +52448,7 @@ function singleResourceURI(resourceURI, id) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+ // todo: how to automate this?
 
 var baseDomain = 'http://circadian.test';
 var baseURL = "".concat(baseDomain, "/api");
@@ -52451,10 +52468,10 @@ var baseURL = "".concat(baseDomain, "/api");
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RepositoryFactory", function() { return RepositoryFactory; });
-/* harmony import */ var _FlowRepository__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FlowRepository */ "./resources/js/repositories/FlowRepository.js");
+/* harmony import */ var _FlowRepository_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FlowRepository.js */ "./resources/js/repositories/FlowRepository.js");
 
 var repositories = {
-  flows: _FlowRepository__WEBPACK_IMPORTED_MODULE_0__["default"]
+  flows: _FlowRepository_js__WEBPACK_IMPORTED_MODULE_0__["default"]
 };
 var RepositoryFactory = {
   get: function get(name) {

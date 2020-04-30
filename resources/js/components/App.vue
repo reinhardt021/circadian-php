@@ -91,7 +91,9 @@
             loopTasks: true,
             timerAudioFile: MetalGongMp3,
         },
-        
+
+        flows: {},
+
         tasks: {
             [task01.id]: {
                 ...task01,
@@ -181,6 +183,7 @@
 
     export default {
         data: function () {
+            //todo: findout proper styling for this to be consistent
             return appState;
         },
         created() {
@@ -188,8 +191,22 @@
         },
         methods: {
             async fetch () {
-                const response = await FlowRepository.get();
-                console.log('>>> response', response);
+                const { data } = await FlowRepository.get();
+                console.log('>>> data', data);
+                // can probably do without this if given typehinting >> todo: typescript
+                if (data.hasOwnProperty('data') && Array.isArray(data.data)) {
+                    data.data.reduce(function (flows, flow) {
+                        console.log('>>> flows', flows);
+                        console.log('>>> flow', flow);
+                        flows[flow.id] = flow;
+                        // todo: make API call
+                        // todo: attach tasks to the flow
+
+                        return flows;
+                    }, this.flows);
+                }
+
+                console.log('>>> this.flows', this.flows);
             },
             toggleTimer() {
                 const self = this;

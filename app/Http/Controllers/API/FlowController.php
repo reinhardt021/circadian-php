@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Commands\FlowDestroyCommand;
 use App\Commands\FlowStoreCommand;
 use App\Commands\FlowUpdateCommand;
+use App\Http\Resources\Flow as FlowResource;
 use App\Queries\FlowShowQuery;
 use App\Http\Controllers\Controller;
 use App\Services\FlowResourceService;
@@ -27,11 +28,10 @@ class FlowController extends Controller
     public function index(): JsonResponse
     {
         // todo: use the request to get the User in the session >> do in Query DTO
-        // todo: use fractal / transformer
         return \response()->json(
             [
                 'message' => 'Flow index route',
-                'data' => $this->service->getFlows(),
+                'data' => FlowResource::collection($this->service->getFlows()),
             ],
             Response::HTTP_OK
         );
