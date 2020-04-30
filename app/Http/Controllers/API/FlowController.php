@@ -47,7 +47,7 @@ class FlowController extends Controller
         return \response()->json(
             [
                 'message' => 'Flow store route',
-                'data' => $this->service->postFlow($command),
+                'data' => new FlowResource($this->service->postFlow($command)),
             ],
             Response::HTTP_CREATED
         );
@@ -63,7 +63,7 @@ class FlowController extends Controller
         return \response()->json(
             [
                 'message' => 'Flow show route',
-                'data' => $this->service->getFlow($query),
+                'data' => new FlowResource($this->service->getFlow($query)),
             ],
             Response::HTTP_OK
         );
@@ -79,7 +79,7 @@ class FlowController extends Controller
         return \response()->json(
             [
                 'message' => 'Flow update route',
-                'data' => $this->service->updateFlow($command),
+                'data' => new FlowResource($this->service->updateFlow($command)),
             ],
             Response::HTTP_OK
         );
