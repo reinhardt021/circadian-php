@@ -14,8 +14,6 @@ class FlowTest extends TestCase
     private array $expectedFlowStructure = [
         'id',
         'title',
-        'created_at',
-        'updated_at',
     ];
 
     /**
