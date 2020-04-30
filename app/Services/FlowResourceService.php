@@ -42,7 +42,11 @@ class FlowResourceService
     {
         // todo: consider Repository pattern for better testability
         // if Repo pattern used then can combine this with getFlows() just diff Criteria passed
+        /** @var Flow $flow */
         $flow = Flow::find($query->id);
+        if (\count($query->include) > 0) {
+            $flow->load($query->include);
+        }
 
         return $flow;
     }

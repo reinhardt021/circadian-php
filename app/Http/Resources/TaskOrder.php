@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TaskOrder extends JsonResource
@@ -9,13 +10,14 @@ class TaskOrder extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
+     *
      * @return array
      */
     public function toArray($request)
     {
         return [
-            'type' => 'tasks',
+            'type' => 'taskOrders',
             'id' => $this->id,
             'attributes' => [
                 'position' => $this->position,
