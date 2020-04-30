@@ -6,6 +6,7 @@ use App\Commands\FlowDestroyCommand;
 use App\Commands\FlowStoreCommand;
 use App\Commands\FlowUpdateCommand;
 use App\Flow;
+use App\Queries\FlowIndexQuery;
 use App\Queries\FlowShowQuery;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -16,9 +17,12 @@ class FlowResourceService
      *
      * @return Flow[]|Collection
      */
-    public function getFlows(): Collection
+    public function getFlows(FlowIndexQuery $query): Collection
     {
         $flows = Flow::all();
+        if (\count($query->include) > 0) {
+            $flows->load($query->include);
+        }
 
         return $flows;
     }

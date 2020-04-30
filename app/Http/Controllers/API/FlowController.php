@@ -6,6 +6,7 @@ use App\Commands\FlowDestroyCommand;
 use App\Commands\FlowStoreCommand;
 use App\Commands\FlowUpdateCommand;
 use App\Http\Resources\Flow as FlowResource;
+use App\Queries\FlowIndexQuery;
 use App\Queries\FlowShowQuery;
 use App\Http\Controllers\Controller;
 use App\Services\FlowResourceService;
@@ -25,13 +26,14 @@ class FlowController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        // todo: use the request to get the User in the session >> do in Query DTO
+        $query = FlowIndexQuery::buildFromRequest($request);
+
         return \response()->json(
             [
                 'message' => 'Flow index route',
-                'data' => FlowResource::collection($this->service->getFlows()),
+                'data' => FlowResource::collection($this->service->getFlows($query)),
             ],
             Response::HTTP_OK
         );
