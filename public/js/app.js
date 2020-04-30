@@ -2128,32 +2128,29 @@ function countdownTimeLoop(app) {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _yield$FlowRepository, data;
+        var _yield$FlowRepository, data, userFlows;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return FlowRepository.get();
+                return FlowRepository.get(true, true);
 
               case 2:
                 _yield$FlowRepository = _context.sent;
                 data = _yield$FlowRepository.data;
-                console.log('>>> data', data); // can probably do without this if given typehinting >> todo: typescript
 
+                // can probably do without this if given typehinting >> todo: typescript
                 if (data.hasOwnProperty('data') && Array.isArray(data.data)) {
-                  data.data.reduce(function (flows, flow) {
-                    console.log('>>> flows', flows);
-                    console.log('>>> flow', flow);
+                  userFlows = data.data.reduce(function (flows, flow) {
                     flows[flow.id] = flow;
                     return flows;
-                  }, _this.flows);
+                  }, {});
+                  _this.flows = userFlows;
                 }
 
-                console.log('>>> this.flows', _this.flows);
-
-              case 7:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -52410,6 +52407,12 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Repository_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Repository.js */ "./resources/js/repositories/Repository.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 var resourceURI = '/flows';
 
@@ -52417,15 +52420,62 @@ function singleResourceURI(resourceURI, id) {
   return "".concat(resourceURI, "/").concat(id);
 }
 
+function includeAssociations(resourceURI, includeTaskOrders, includeTasks) {
+  var includes = [];
+
+  if (includeTaskOrders) {
+    includes.push('taskOrders');
+  }
+
+  if (includeTasks) {
+    includes.push('tasks');
+  }
+
+  return includes.length > 0 ? "".concat(resourceURI, "?include=") + includes.join() : resourceURI;
+}
+
+function buildParams() {
+  var includeTaskOrders = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  var includeTasks = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var includes = [];
+
+  if (includeTaskOrders) {
+    includes.push('taskOrders');
+  }
+
+  if (includeTasks) {
+    includes.push('tasks');
+  }
+
+  return _objectSpread({}, includes.length > 0 && {
+    include: includes.join()
+  });
+}
+
+function buildConfig() {
+  var includeTaskOrders = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  var includeTasks = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var params = buildParams(includeTaskOrders, includeTasks);
+  return _objectSpread({}, params != {} && {
+    params: params
+  });
+}
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   get: function get() {
-    return _Repository_js__WEBPACK_IMPORTED_MODULE_0__["default"].get(resourceURI);
+    var includeTaskOrders = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+    var includeTasks = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    var config = buildConfig(includeTaskOrders, includeTasks);
+    return _Repository_js__WEBPACK_IMPORTED_MODULE_0__["default"].get(resourceURI, config);
   },
   createFlow: function createFlow(payload) {
     return _Repository_js__WEBPACK_IMPORTED_MODULE_0__["default"].post(resourceURI, payload);
   },
   getFlow: function getFlow(flowId) {
-    return _Repository_js__WEBPACK_IMPORTED_MODULE_0__["default"].get(singleResourceURI(resourceURI, flowId));
+    var includeTaskOrders = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    var includeTasks = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    var config = buildConfig(includeTaskOrders, includeTasks);
+    return _Repository_js__WEBPACK_IMPORTED_MODULE_0__["default"].get(singleResourceURI(resourceURI, flowId), config);
   },
   updateFlow: function updateFlow(flowId, payload) {
     return _Repository_js__WEBPACK_IMPORTED_MODULE_0__["default"].put(singleResourceURI(resourceURI, flowId), payload);

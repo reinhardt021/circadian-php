@@ -191,22 +191,18 @@
         },
         methods: {
             async fetch () {
-                const { data } = await FlowRepository.get();
-                console.log('>>> data', data);
+                const { data } = await FlowRepository.get(true, true);
+
                 // can probably do without this if given typehinting >> todo: typescript
                 if (data.hasOwnProperty('data') && Array.isArray(data.data)) {
-                    data.data.reduce(function (flows, flow) {
-                        console.log('>>> flows', flows);
-                        console.log('>>> flow', flow);
+                    const userFlows = data.data.reduce(function (flows, flow) {
                         flows[flow.id] = flow;
-                        // todo: make API call
-                        // todo: attach tasks to the flow
 
                         return flows;
-                    }, this.flows);
-                }
+                    }, {});
 
-                console.log('>>> this.flows', this.flows);
+                    this.flows = userFlows;
+                }
             },
             toggleTimer() {
                 const self = this;
