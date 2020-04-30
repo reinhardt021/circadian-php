@@ -6,6 +6,7 @@ use App\Commands\TaskDestroyCommand;
 use App\Commands\TaskStoreCommand;
 use App\Commands\TaskUpdateCommand;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Task as TaskResource;
 use App\Queries\TaskIndexQuery;
 use App\Queries\TaskShowQuery;
 use App\Services\TaskResourceService;
@@ -32,7 +33,7 @@ class TaskController extends Controller
         return \response()->json(
             [
                 'message' => 'Task index route',
-                'data' => $this->service->getTasks($query),
+                'data' => TaskResource::collection($this->service->getTasks($query)),
             ],
             Response::HTTP_OK
         );
@@ -48,7 +49,7 @@ class TaskController extends Controller
         return \response()->json(
             [
                 'message' => 'Task store route',
-                'data' => $this->service->postTask($command),
+                'data' => new TaskResource($this->service->postTask($command)),
             ],
             Response::HTTP_CREATED
         );
@@ -64,7 +65,7 @@ class TaskController extends Controller
         return \response()->json(
             [
                 'message' => 'Task show route',
-                'data' => $this->service->getTask($query),
+                'data' => new TaskResource($this->service->getTask($query)),
             ],
             Response::HTTP_OK
         );
@@ -80,7 +81,7 @@ class TaskController extends Controller
         return \response()->json(
             [
                 'message' => 'Task update route',
-                'data' => $this->service->updateTask($command),
+                'data' => new TaskResource($this->service->updateTask($command)),
             ],
             Response::HTTP_OK
         );
