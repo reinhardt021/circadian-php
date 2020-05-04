@@ -1,5 +1,9 @@
 <template>
     <div id="timer" class="site">
+        <h2>
+            <i class="fas fa-bug"></i>
+            <span v-text="currentFlow.title"></span>
+        </h2>
         <AppTimer
             :is-timer-active='isTimerActive'
             :current-task='currentTask'
@@ -11,6 +15,7 @@
         />
         <AppSettings
             :is-timer-active='isTimerActive'
+            :current-flow='currentFlow'
             :current-task='currentTask'
             :tasks='tasks'
             :settings='settings'
@@ -74,6 +79,14 @@
 
     const appState = {
         isTimerActive: false,
+
+        // todo: move this to UserTimerSettings
+        currentFlow: {
+            id: 13,
+            title: 'Mein Flow'
+        },
+
+        // todo: move this to UserTimerSettings
         currentTask: {
             firstTask: task01.id,
             ...task01,
@@ -84,10 +97,11 @@
             audio: null, // used to keep track of Audio files being played
         },
 
+        // todo: get this from API for UserTimerSettings
         settings: {
             isOpen: false,
             autoPlayTasks: true,
-            taskOrder: [task01.id, task02.id, task03.id],
+            taskOrder: [task01.id, task02.id, task03.id], // todo: move this to currentFlow
             loopTasks: true,
             timerAudioFile: MetalGongMp3,
         },

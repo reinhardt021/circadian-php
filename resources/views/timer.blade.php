@@ -13,7 +13,6 @@
 </head>
 <body>
     <div class="content" id="app-timer">
-        <h2>{{ $title }}</h2>
         <div id="timer"></div>
     </div>
     <script src="{{ mix('js/app.js') }}"></script>

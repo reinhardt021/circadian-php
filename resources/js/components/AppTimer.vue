@@ -3,6 +3,7 @@
         <div class="container">
             <div class="timer">
                 <span class="timer-session js-session" v-text="currentTask.title"></span>
+                <span v-if="currentTask.audioFile != ''" v-text="currentTask.audioFile"></span>
                 <span class="timer-countdown js-countdown" v-text="currentTask.time"></span>
                 <button class="button btn-timer" @click='toggleTimer'>
                     <span class="flex-center" v-if='isTimerActive'>

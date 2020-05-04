@@ -18,6 +18,10 @@ html {
     box-sizing: border-box;
 }
 
+body {
+    height: 100%;
+}
+
 #app-timer {
     height: 100%;
     padding: 50px;
@@ -33,6 +37,10 @@ html {
 
     text-align: center;
     -webkit-font-smoothing: antialiased;
+}
+
+#timer {
+    height: 100%;
 }
 
 
@@ -73,16 +81,18 @@ html {
 
 /* MAIN */
 .timer {
+    min-width: 224px;
+    background-color: rgba(255, 255, 255, .25);
+    //border: 4px solid white;
+    border-radius: 50%;
+    max-width: 224px;
+    height: 224px;
+
     position: relative;
     margin: 0 auto;
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
-
-    border: 4px solid white;
-    border-radius: 50%;
-    max-width: 224px;
-    height: 224px;
 }
 
 /* the transparent black outlines surrounding */
@@ -198,6 +208,22 @@ html {
 .settings-enter,
 .settings-leave-to {
     transform: translateX(100%);
+}
+
+#settings-close {
+    position: absolute;
+    float: right;
+    top: 10px;
+    right: 15px;
+    padding: 0;
+}
+
+#settings-volume {
+    position: absolute;
+    float: right;
+    right: 15px;
+    bottom: 15px;
+    padding: 0;
 }
 
 .flow-title {
