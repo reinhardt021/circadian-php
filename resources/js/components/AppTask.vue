@@ -2,8 +2,12 @@
     <div class='task settings-card'>
         <div class="task-header">
             <span>
-                <i class="fa fa-coffee" aria-hidden="true" v-if="task.type === 'break'"></i>
-                <i class="fa fa-crosshairs" aria-hidden="true" v-if="task.type === 'focus'"></i>
+                <span v-show="task.type === 'break'" @click="toggleTaskType">
+                    <i class="fa fa-coffee" aria-hidden="true"></i>
+                </span>
+                <span v-show="task.type === 'focus'" @click="toggleTaskType">
+                    <i class="fa fa-crosshairs" aria-hidden="true"></i>
+                </span>
                 <span class='task-title' contenteditable='true' v-text='task.title' @blur='changeTitle'></span>
             </span>
             <span>
@@ -41,6 +45,13 @@
                     title: e.target.innerText.trim(),
                 };
                 this.$emit('change-task', newTask);
+            },
+            toggleTaskType() {
+                const taskTypeMap = {
+                    'break': 'focus',
+                    'focus': 'break',
+                };
+                this.task.type = taskTypeMap[this.task.type];
             },
             changeTime(e) {
                 const { dataset:{ type }, value } = e.target;
