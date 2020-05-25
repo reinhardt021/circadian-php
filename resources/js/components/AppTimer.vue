@@ -2,8 +2,16 @@
     <main class="site-content">
         <div class="container">
             <div class="timer">
-                <span class="timer-session js-session" v-text="currentTask.title"></span>
-                <span v-if="currentTask.audioFile != ''" v-text="currentTask.audioFile"></span>
+                <span>
+                    <span v-show="currentTask.type === 'break'">
+                        <i class="fa fa-coffee" aria-hidden="true"></i>
+                    </span>
+                    <span v-show="currentTask.type === 'focus'">
+                        <i class="fa fa-crosshairs" aria-hidden="true"></i>
+                    </span>
+                    <span class="timer-session js-session" v-text="currentTask.title"></span>
+                </span>
+<!--                <span v-if="currentTask.audioFile != ''" v-text="currentTask.audioFile"></span>-->
                 <span class="timer-countdown js-countdown" v-text="currentTask.time"></span>
                 <button class="button btn-timer" @click='toggleTimer'>
                     <span class="flex-center" v-if='isTimerActive'>
