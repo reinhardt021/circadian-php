@@ -33,13 +33,13 @@
     import AppControls from './AppControls.vue'
     import AppSettings from './AppSettings.vue'
 
-    import { RepositoryFactory } from '../repositories/RepositoryFactory.js'
-    const FlowRepository = RepositoryFactory.get('flows');
+    import { showTime, formatTime, updateCurrentTask } from '../helpers.js'
 
     import WindMp3 from '../../audio/Wind-Mark_DiAngelo.mp3'
     import MetalGongMp3 from '../../audio/Metal_Gong-Dianakc.mp3'
 
-    import { showTime, formatTime, updateCurrentTask } from '../helpers.js'
+    import { RepositoryFactory } from '../repositories/RepositoryFactory.js'
+    const FlowRepository = RepositoryFactory.get('flows');
 
     const templateTask = {
         title: 'New Task',
@@ -109,6 +109,7 @@
             taskOrder: [task01.id, task02.id, task03.id], // todo: move this to currentFlow
             loopTasks: true,
             timerAudioFile: MetalGongMp3,
+            audio: null,
         },
 
         flows: {},
@@ -171,7 +172,7 @@
             if (app.currentTask.audio) {
                 app.currentTask.audio.pause();
             }
-            playAudio(app.settings.timerAudioFile);
+            app.settings.audio = playAudio(app.settings.timerAudioFile);
         }
 
         if (seconds == 0 && minutes == 0 && hours ==0) {

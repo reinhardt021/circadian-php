@@ -1925,13 +1925,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AppTimer_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AppTimer.vue */ "./resources/js/components/AppTimer.vue");
 /* harmony import */ var _AppControls_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AppControls.vue */ "./resources/js/components/AppControls.vue");
 /* harmony import */ var _AppSettings_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AppSettings.vue */ "./resources/js/components/AppSettings.vue");
-/* harmony import */ var _repositories_RepositoryFactory_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../repositories/RepositoryFactory.js */ "./resources/js/repositories/RepositoryFactory.js");
+/* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../helpers.js */ "./resources/js/helpers.js");
+/* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_helpers_js__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _audio_Wind_Mark_DiAngelo_mp3__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../audio/Wind-Mark_DiAngelo.mp3 */ "./resources/audio/Wind-Mark_DiAngelo.mp3");
 /* harmony import */ var _audio_Wind_Mark_DiAngelo_mp3__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_audio_Wind_Mark_DiAngelo_mp3__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _audio_Metal_Gong_Dianakc_mp3__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../audio/Metal_Gong-Dianakc.mp3 */ "./resources/audio/Metal_Gong-Dianakc.mp3");
 /* harmony import */ var _audio_Metal_Gong_Dianakc_mp3__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_audio_Metal_Gong_Dianakc_mp3__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../helpers.js */ "./resources/js/helpers.js");
-/* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_helpers_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _repositories_RepositoryFactory_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../repositories/RepositoryFactory.js */ "./resources/js/repositories/RepositoryFactory.js");
 
 
 var _tasks;
@@ -1980,18 +1980,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var FlowRepository = _repositories_RepositoryFactory_js__WEBPACK_IMPORTED_MODULE_4__["RepositoryFactory"].get('flows');
 
 
 
+var FlowRepository = _repositories_RepositoryFactory_js__WEBPACK_IMPORTED_MODULE_7__["RepositoryFactory"].get('flows');
 var templateTask = {
   title: 'New Task',
   type: 'break',
   hours: 0,
   minutes: 0,
   seconds: 0,
-  time: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_7__["showTime"])(0, 0, 0),
-  view: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_7__["formatTime"])(0, 0, 0),
+  time: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_4__["showTime"])(0, 0, 0),
+  view: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_4__["formatTime"])(0, 0, 0),
   nextTask: null,
   audioFile: ''
 };
@@ -2033,8 +2033,8 @@ var appState = {
   currentTask: _objectSpread({
     firstTask: task01.id
   }, task01, {
-    time: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_7__["showTime"])(task01.hours, task01.minutes, task01.seconds),
-    view: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_7__["formatTime"])(task01.hours, task01.minutes, task01.seconds),
+    time: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_4__["showTime"])(task01.hours, task01.minutes, task01.seconds),
+    view: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_4__["formatTime"])(task01.hours, task01.minutes, task01.seconds),
     nextTask: task02.id,
     timer: null,
     // used to keep track of interval of counting down
@@ -2050,20 +2050,21 @@ var appState = {
     taskOrder: [task01.id, task02.id, task03.id],
     // todo: move this to currentFlow
     loopTasks: true,
-    timerAudioFile: _audio_Metal_Gong_Dianakc_mp3__WEBPACK_IMPORTED_MODULE_6___default.a
+    timerAudioFile: _audio_Metal_Gong_Dianakc_mp3__WEBPACK_IMPORTED_MODULE_6___default.a,
+    audio: null
   },
   flows: {},
   tasks: (_tasks = {}, _defineProperty(_tasks, task01.id, _objectSpread({}, task01, {
-    time: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_7__["showTime"])(task01.hours, task01.minutes, task01.seconds),
-    view: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_7__["formatTime"])(task01.hours, task01.minutes, task01.seconds),
+    time: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_4__["showTime"])(task01.hours, task01.minutes, task01.seconds),
+    view: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_4__["formatTime"])(task01.hours, task01.minutes, task01.seconds),
     nextTask: task02.id
   })), _defineProperty(_tasks, task02.id, _objectSpread({}, task02, {
-    time: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_7__["showTime"])(task02.hours, task02.minutes, task02.seconds),
-    view: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_7__["formatTime"])(task02.hours, task02.minutes, task02.seconds),
+    time: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_4__["showTime"])(task02.hours, task02.minutes, task02.seconds),
+    view: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_4__["formatTime"])(task02.hours, task02.minutes, task02.seconds),
     nextTask: task03.id
   })), _defineProperty(_tasks, task03.id, _objectSpread({}, task03, {
-    time: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_7__["showTime"])(task03.hours, task03.minutes, task03.seconds),
-    view: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_7__["formatTime"])(task03.hours, task03.minutes, task03.seconds),
+    time: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_4__["showTime"])(task03.hours, task03.minutes, task03.seconds),
+    view: Object(_helpers_js__WEBPACK_IMPORTED_MODULE_4__["formatTime"])(task03.hours, task03.minutes, task03.seconds),
     nextTask: null
   })), _tasks)
 };
@@ -2108,7 +2109,7 @@ function countdownTimeLoop(app) {
       app.currentTask.audio.pause();
     }
 
-    playAudio(app.settings.timerAudioFile);
+    app.settings.audio = playAudio(app.settings.timerAudioFile);
   }
 
   if (seconds == 0 && minutes == 0 && hours == 0) {
@@ -2124,14 +2125,14 @@ function countdownTimeLoop(app) {
     }
 
     var nextTask = currentTask.nextTask ? tasks[currentTask.nextTask] : tasks[currentTask.firstTask];
-    app.currentTask = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_7__["updateCurrentTask"])(currentTask, nextTask);
+    app.currentTask = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_4__["updateCurrentTask"])(currentTask, nextTask);
     app.isTimerActive = true;
     app.currentTask.timer = setInterval(countdownTimeLoop, 1000, app);
     app.currentTask.audio = playAudio(nextTask.audioFile, true);
   }
 
-  currentTask.time = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_7__["showTime"])(currentTask.hours, currentTask.minutes, currentTask.seconds);
-  currentTask.view = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_7__["formatTime"])(currentTask.hours, currentTask.minutes, currentTask.seconds);
+  currentTask.time = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_4__["showTime"])(currentTask.hours, currentTask.minutes, currentTask.seconds);
+  currentTask.view = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_4__["formatTime"])(currentTask.hours, currentTask.minutes, currentTask.seconds);
 }
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2212,7 +2213,7 @@ function countdownTimeLoop(app) {
       // or reset to the first task in the flow
 
       var nextTask = currentTask.firstTask === null ? currentTask : tasks[currentTask.firstTask];
-      this.currentTask = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_7__["updateCurrentTask"])(currentTask, nextTask);
+      this.currentTask = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_4__["updateCurrentTask"])(currentTask, nextTask);
     },
     toggleSettings: function toggleSettings() {
       this.settings.isOpen = !this.settings.isOpen;
@@ -2275,7 +2276,7 @@ function countdownTimeLoop(app) {
 
 
       if (currentTask.id == taskId && !isTimerActive && taskToDelete.nextTask) {
-        this.currentTask = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_7__["updateCurrentTask"])(currentTask, tasks[taskToDelete.nextTask]);
+        this.currentTask = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_4__["updateCurrentTask"])(currentTask, tasks[taskToDelete.nextTask]);
       } // remove Task from taskOrder list and from Tasks linked list
 
 
@@ -2288,7 +2289,7 @@ function countdownTimeLoop(app) {
       this.tasks[newTask.id] = newTask;
 
       if (newTask.id == this.currentTask.id && !this.isTimerActive) {
-        this.currentTask = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_7__["updateCurrentTask"])(this.currentTask, newTask);
+        this.currentTask = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_4__["updateCurrentTask"])(this.currentTask, newTask);
       }
     },
     updateTask: function updateTask(newTasks, newCurrentTask) {
@@ -2426,7 +2427,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -2458,8 +2458,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.log('>>> setPlaylist type=' + type);
     },
     changeVolume: function changeVolume() {
+      // set the volume from when you first turn on the audio -todo
       var newVolume = Number(this.currentTask.volume);
-      this.currentTask.audio.volume = newVolume / 100;
+
+      if (this.currentTask.audio) {
+        this.currentTask.audio.volume = newVolume / 100;
+      }
+
+      if (this.settings.audio) {
+        this.settings.audio.volume = newVolume / 100;
+      }
     }
   },
   components: {
@@ -2513,6 +2521,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2526,6 +2538,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     changeTitle: function changeTitle(e) {
       var newTask = _objectSpread({}, this.task, {
         title: e.target.innerText.trim()
+      });
+
+      this.$emit('change-task', newTask);
+    },
+    toggleTaskType: function toggleTaskType() {
+      var taskTypeMap = {
+        'break': 'focus',
+        'focus': 'break'
+      };
+
+      var newTask = _objectSpread({}, this.task, {
+        type: taskTypeMap[this.task.type]
       });
 
       this.$emit('change-task', newTask);
@@ -2559,6 +2583,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -39430,19 +39462,47 @@ var render = function() {
   return _c("div", { staticClass: "task settings-card" }, [
     _c("div", { staticClass: "task-header" }, [
       _c("span", [
-        _vm.task.type === "break"
-          ? _c("i", {
+        _c(
+          "span",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.task.type === "break",
+                expression: "task.type === 'break'"
+              }
+            ],
+            on: { click: _vm.toggleTaskType }
+          },
+          [
+            _c("i", {
               staticClass: "fa fa-coffee",
               attrs: { "aria-hidden": "true" }
             })
-          : _vm._e(),
+          ]
+        ),
         _vm._v(" "),
-        _vm.task.type === "focus"
-          ? _c("i", {
+        _c(
+          "span",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.task.type === "focus",
+                expression: "task.type === 'focus'"
+              }
+            ],
+            on: { click: _vm.toggleTaskType }
+          },
+          [
+            _c("i", {
               staticClass: "fa fa-crosshairs",
               attrs: { "aria-hidden": "true" }
             })
-          : _vm._e(),
+          ]
+        ),
         _vm._v(" "),
         _c("span", {
           staticClass: "task-title",
@@ -39596,16 +39656,52 @@ var render = function() {
   return _c("main", { staticClass: "site-content" }, [
     _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "timer" }, [
-        _c("span", {
-          staticClass: "timer-session js-session",
-          domProps: { textContent: _vm._s(_vm.currentTask.title) }
-        }),
-        _vm._v(" "),
-        _vm.currentTask.audioFile != ""
-          ? _c("span", {
-              domProps: { textContent: _vm._s(_vm.currentTask.audioFile) }
-            })
-          : _vm._e(),
+        _c("span", [
+          _c(
+            "span",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.currentTask.type === "break",
+                  expression: "currentTask.type === 'break'"
+                }
+              ]
+            },
+            [
+              _c("i", {
+                staticClass: "fa fa-coffee",
+                attrs: { "aria-hidden": "true" }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.currentTask.type === "focus",
+                  expression: "currentTask.type === 'focus'"
+                }
+              ]
+            },
+            [
+              _c("i", {
+                staticClass: "fa fa-crosshairs",
+                attrs: { "aria-hidden": "true" }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c("span", {
+            staticClass: "timer-session js-session",
+            domProps: { textContent: _vm._s(_vm.currentTask.title) }
+          })
+        ]),
         _vm._v(" "),
         _c("span", {
           staticClass: "timer-countdown js-countdown",

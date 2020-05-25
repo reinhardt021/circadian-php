@@ -2,7 +2,6 @@
     <transition name='settings' enter-active-class='settings-show'>
         <div class="settings">
             <div class="settings-header">
-                <!--                fixed to top -todo -->
                 <button class="settings-button" id="settings-flows">
                     <i class="fa fa-list-ul" aria-hidden="true"></i>
                     <span class="settings-button-text">Flows</span>
@@ -100,7 +99,12 @@
             },
             changeVolume() {
                 const newVolume = Number(this.currentTask.volume);
-                this.currentTask.audio.volume = newVolume / 100;
+                if (this.currentTask.audio) {
+                    this.currentTask.audio.volume = newVolume / 100;
+                }
+                if (this.settings.audio) {
+                    this.settings.audio.volume = newVolume / 100;
+                }
             },
         },
         components: {
