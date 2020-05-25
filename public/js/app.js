@@ -2075,9 +2075,7 @@ function playAudio(filePath, volumePercent, loop) {
   }
 
   var audio = new Audio(filePath);
-  audio.loop = loop ? loop : false; // set the volume from when you first turn on the audio -todo
-  // todo: set the volume right in the beginning
-
+  audio.loop = loop ? loop : false;
   audio.volume = volumePercent / 100;
   audio.play();
   return audio;
