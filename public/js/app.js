@@ -2075,7 +2075,9 @@ function playAudio(filePath, loop) {
   }
 
   var audio = new Audio(filePath);
-  audio.loop = loop ? loop : false;
+  audio.loop = loop ? loop : false; // set the volume from when you first turn on the audio -todo
+  // todo: set the volume right in the beginning
+
   audio.play();
   return audio;
 }
@@ -2458,7 +2460,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.log('>>> setPlaylist type=' + type);
     },
     changeVolume: function changeVolume() {
-      // set the volume from when you first turn on the audio -todo
       var newVolume = Number(this.currentTask.volume);
 
       if (this.currentTask.audio) {
@@ -39473,6 +39474,7 @@ var render = function() {
                 expression: "task.type === 'break'"
               }
             ],
+            staticClass: "task-type",
             on: { click: _vm.toggleTaskType }
           },
           [
@@ -39494,6 +39496,7 @@ var render = function() {
                 expression: "task.type === 'focus'"
               }
             ],
+            staticClass: "task-type",
             on: { click: _vm.toggleTaskType }
           },
           [

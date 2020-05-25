@@ -273,6 +273,10 @@ body {
 .task-header {
     display: flex;
     justify-content: space-between;
+    
+    .task-type:not(:disabled) {
+        cursor: pointer;
+    }
 }
 
 .task-content {

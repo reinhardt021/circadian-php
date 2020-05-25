@@ -2,10 +2,10 @@
     <div class='task settings-card'>
         <div class="task-header">
             <span>
-                <span v-show="task.type === 'break'" @click="toggleTaskType">
+                <span class="task-type" v-show="task.type === 'break'" @click="toggleTaskType">
                     <i class="fa fa-coffee" aria-hidden="true"></i>
                 </span>
-                <span v-show="task.type === 'focus'" @click="toggleTaskType">
+                <span class="task-type" v-show="task.type === 'focus'" @click="toggleTaskType">
                     <i class="fa fa-crosshairs" aria-hidden="true"></i>
                 </span>
                 <span class='task-title' contenteditable='true' v-text='task.title' @blur='changeTitle'></span>
