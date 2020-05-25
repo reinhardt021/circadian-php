@@ -2069,7 +2069,7 @@ var appState = {
   })), _tasks)
 };
 
-function playAudio(filePath, loop) {
+function playAudio(filePath, volumePercent, loop) {
   if (filePath == '') {
     return null;
   }
@@ -2078,6 +2078,7 @@ function playAudio(filePath, loop) {
   audio.loop = loop ? loop : false; // set the volume from when you first turn on the audio -todo
   // todo: set the volume right in the beginning
 
+  audio.volume = volumePercent / 100;
   audio.play();
   return audio;
 }
@@ -2111,7 +2112,7 @@ function countdownTimeLoop(app) {
       app.currentTask.audio.pause();
     }
 
-    app.settings.audio = playAudio(app.settings.timerAudioFile);
+    app.settings.audio = playAudio(app.settings.timerAudioFile, currentTask.volume);
   }
 
   if (seconds == 0 && minutes == 0 && hours == 0) {
@@ -2130,7 +2131,7 @@ function countdownTimeLoop(app) {
     app.currentTask = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_4__["updateCurrentTask"])(currentTask, nextTask);
     app.isTimerActive = true;
     app.currentTask.timer = setInterval(countdownTimeLoop, 1000, app);
-    app.currentTask.audio = playAudio(nextTask.audioFile, true);
+    app.currentTask.audio = playAudio(nextTask.audioFile, currentTask.volume, true);
   }
 
   currentTask.time = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_4__["showTime"])(currentTask.hours, currentTask.minutes, currentTask.seconds);
@@ -2189,7 +2190,7 @@ function countdownTimeLoop(app) {
         if (self.currentTask.audio) {
           self.currentTask.audio.play();
         } else {
-          self.currentTask.audio = playAudio(self.currentTask.audioFile, true);
+          self.currentTask.audio = playAudio(self.currentTask.audioFile, self.currentTask.volume, true);
         }
 
         self.currentTask.timer = setInterval(countdownTimeLoop, 1000, self);

@@ -136,12 +136,13 @@
         },
     };
 
-    function playAudio(filePath, loop) {
+    function playAudio(filePath, volumePercent, loop) {
         if (filePath == '') {
             return null;
         }
         var audio = new Audio(filePath);
         audio.loop = loop ? loop : false;
+        audio.volume = volumePercent / 100;
         audio.play();
 
         return audio;
@@ -172,7 +173,7 @@
             if (app.currentTask.audio) {
                 app.currentTask.audio.pause();
             }
-            app.settings.audio = playAudio(app.settings.timerAudioFile);
+            app.settings.audio = playAudio(app.settings.timerAudioFile, currentTask.volume);
         }
 
         if (seconds == 0 && minutes == 0 && hours ==0) {
@@ -194,7 +195,7 @@
             app.currentTask = updateCurrentTask(currentTask, nextTask);
             app.isTimerActive = true;
             app.currentTask.timer = setInterval(countdownTimeLoop, 1000, app);
-            app.currentTask.audio = playAudio(nextTask.audioFile, true);
+            app.currentTask.audio = playAudio(nextTask.audioFile, currentTask.volume, true);
         }
 
         currentTask.time = showTime(currentTask.hours, currentTask.minutes, currentTask.seconds);
@@ -235,7 +236,7 @@
                     if (self.currentTask.audio) {
                         self.currentTask.audio.play();
                     } else {
-                        self.currentTask.audio = playAudio(self.currentTask.audioFile, true);
+                        self.currentTask.audio = playAudio(self.currentTask.audioFile, self.currentTask.volume, true);
                     }
                     self.currentTask.timer = setInterval(countdownTimeLoop, 1000, self);
                 } else {
