@@ -2038,7 +2038,9 @@ var appState = {
     nextTask: task02.id,
     timer: null,
     // used to keep track of interval of counting down
-    audio: null // used to keep track of Audio files being played
+    audio: null,
+    // used to keep track of Audio files being played
+    volume: 75 // default to 75% audio
 
   }),
   // todo: get this from API for UserTimerSettings
@@ -2425,7 +2427,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -2457,7 +2458,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.log('>>> setPlaylist type=' + type);
     },
     changeVolume: function changeVolume() {
-      console.log('>>> volume change');
+      var newVolume = Number(this.currentTask.volume);
+      this.currentTask.audio.volume = newVolume / 100;
     }
   },
   components: {
@@ -2514,15 +2516,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      timeFormat: {
-        hours: 'hours',
-        minutes: 'minutes',
-        seconds: 'seconds'
-      }
-    };
-  },
   props: {
     task: Object
   },
@@ -39383,11 +39376,28 @@ var render = function() {
               attrs: { "aria-hidden": "true" }
             }),
             _vm._v("\n                Now Playing ...\n                "),
-            _vm._v(" "),
             _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.currentTask.volume,
+                  expression: "currentTask.volume"
+                }
+              ],
               staticClass: "volume-input",
               attrs: { type: "range", min: "0", max: "100" },
-              on: { input: _vm.changeVolume }
+              domProps: { value: _vm.currentTask.volume },
+              on: {
+                input: _vm.changeVolume,
+                __r: function($event) {
+                  return _vm.$set(
+                    _vm.currentTask,
+                    "volume",
+                    $event.target.value
+                  )
+                }
+              }
             })
           ])
         ])

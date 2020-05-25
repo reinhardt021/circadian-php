@@ -99,6 +99,7 @@
             nextTask: task02.id,
             timer: null, // used to keep track of interval of counting down
             audio: null, // used to keep track of Audio files being played
+            volume: 75, // default to 75% audio
         },
 
         // todo: get this from API for UserTimerSettings

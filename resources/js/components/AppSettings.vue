@@ -55,8 +55,7 @@
                 <div class="settings-card">
                     <i class="fa fa-volume-up" aria-hidden="true"></i>
                     Now Playing ...
-                    <!--                        <input data-type='task-hours' v-model='task.hours' />-->
-                    <input class='volume-input' type='range' min='0' max='100' @input='changeVolume'/>
+                    <input class='volume-input' type='range' min='0' max='100' v-model="currentTask.volume" @input='changeVolume'/>
                 </div>
             </div>
         </div>
@@ -100,7 +99,8 @@
                 console.log('>>> setPlaylist type=' + type);
             },
             changeVolume() {
-                console.log('>>> volume change');
+                const newVolume = Number(this.currentTask.volume);
+                this.currentTask.audio.volume = newVolume / 100;
             },
         },
         components: {
