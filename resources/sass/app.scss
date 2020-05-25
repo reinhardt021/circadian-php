@@ -258,6 +258,18 @@ body {
     margin-bottom: 10px;
 }
 
+.settings-options > .settings-card {
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.3);
+}
+
+.settings-options > .settings-card:hover {
+    box-shadow: 1px 1px 3px rgba(135, 206, 250, 0.2);
+    background-color: rgba(135, 206, 250, 0.1);
+    color: rgba(0, 0, 0, 0.5);
+}
+
 .task-header {
     display: flex;
     justify-content: space-between;
