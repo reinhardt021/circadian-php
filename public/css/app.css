@@ -11153,10 +11153,12 @@ body {
 
 .task-content .time-view .time-hours,
 .task-content .time-view .time-seconds {
+  text-align: center;
   color: rgba(0, 0, 0, 0.4);
 }
 
 .task-content .time-view .time-minutes {
+  text-align: center;
   color: rgba(0, 0, 0, 0.5);
 }
 

@@ -2511,7 +2511,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -39450,15 +39449,7 @@ var render = function() {
       "div",
       { staticClass: "task-content" },
       [
-        _c("TimeView", {
-          staticClass: "task-times",
-          attrs: { time: _vm.task.view }
-        }),
-        _vm._v(" "),
-        _c("TimeView", {
-          staticClass: "time-labels",
-          attrs: { time: _vm.timeFormat }
-        }),
+        _c("TimeView", { attrs: { time: _vm.task.view } }),
         _vm._v(" "),
         _c("input", {
           directives: [
@@ -39783,20 +39774,32 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "time-view" }, [
-    _c("span", {
-      staticClass: "time-hours",
-      domProps: { textContent: _vm._s(_vm.time.hours) }
-    }),
+    _c("span", { staticClass: "time-hours" }, [
+      _c("div", {
+        staticClass: "task-times",
+        domProps: { textContent: _vm._s(_vm.time.hours) }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "time-labels" }, [_vm._v("hours")])
+    ]),
     _vm._v(" "),
-    _c("span", {
-      staticClass: "time-minutes",
-      domProps: { textContent: _vm._s(_vm.time.minutes) }
-    }),
+    _c("span", { staticClass: "time-minutes" }, [
+      _c("div", {
+        staticClass: "task-times",
+        domProps: { textContent: _vm._s(_vm.time.minutes) }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "time-labels" }, [_vm._v("minutes")])
+    ]),
     _vm._v(" "),
-    _c("span", {
-      staticClass: "time-seconds",
-      domProps: { textContent: _vm._s(_vm.time.seconds) }
-    })
+    _c("span", { staticClass: "time-seconds" }, [
+      _c("div", {
+        staticClass: "task-times",
+        domProps: { textContent: _vm._s(_vm.time.seconds) }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "time-labels" }, [_vm._v("seconds")])
+    ])
   ])
 }
 var staticRenderFns = []

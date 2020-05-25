@@ -289,10 +289,12 @@ body {
         justify-content: space-evenly;
 
         .time-hours, .time-seconds {
+            text-align: center;
             color: rgba(0, 0, 0, 0.4);
         }
 
         .time-minutes {
+            text-align: center;
             color: rgba(0, 0, 0, 0.5);
         }
     }

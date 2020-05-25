@@ -1,17 +1,17 @@
 <template>
     <div class="time-view">
-        <span
-            class="time-hours"
-            v-text="time.hours"
-        ></span>
-        <span
-            class="time-minutes"
-            v-text="time.minutes"
-        ></span>
-        <span
-            class="time-seconds"
-            v-text="time.seconds"
-        ></span>
+        <span class="time-hours">
+            <div class="task-times" v-text="time.hours"></div>
+            <div class="time-labels">hours</div>
+        </span>
+        <span class="time-minutes">
+            <div class="task-times" v-text="time.minutes"></div>
+            <div class="time-labels">minutes</div>
+        </span>
+        <span class="time-seconds">
+            <div class="task-times" v-text="time.seconds"></div>
+            <div class="time-labels">seconds</div>
+        </span>
     </div>
 </template>
 

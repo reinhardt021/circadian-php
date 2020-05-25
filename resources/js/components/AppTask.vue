@@ -11,8 +11,7 @@
             </span>
         </div>
         <div class='task-content'>
-            <TimeView class='task-times' :time='task.view'/>
-            <TimeView class='time-labels' :time='timeFormat'/>
+            <TimeView :time='task.view'/>
             <input class='task-input' type='range' min='0' max='24' data-type='task-hours' v-model='task.hours' @input='changeTime'/>
             <input class='task-input' type='range' min='0' max='59' data-type='task-minutes' v-model='task.minutes' @input='changeTime'/>
             <input class='task-input' type='range' min='0' max='59' data-type='task-seconds' v-model='task.seconds' @input='changeTime'/>
@@ -29,15 +28,6 @@
     import { showTime, formatTime } from '../helpers.js'
 
     export default {
-        data: function () {
-            return {
-                timeFormat: {
-                    hours: 'hours',
-                    minutes: 'minutes',
-                    seconds: 'seconds',
-                },
-            };
-        },
         props: {
             task: Object,
         },
