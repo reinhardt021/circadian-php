@@ -5,10 +5,10 @@
                 <!--                fixed to top -todo -->
                 <button class="settings-button" id="settings-flows">
                     <i class="fa fa-list-ul" aria-hidden="true"></i>
-                    Flows
+                    <span class="settings-button-text">Flows</span>
                 </button>
                 <button class="settings-button" id="settings-close" @click='closeSettings'>
-                    Close
+                    <span class="settings-button-text">Close</span>
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </button>
             </div>

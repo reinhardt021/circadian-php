@@ -2426,10 +2426,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -2519,9 +2515,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       timeFormat: {
-        hours: 'hh',
-        minutes: 'mm',
-        seconds: 'ss'
+        hours: 'hours',
+        minutes: 'minutes',
+        seconds: 'seconds'
       }
     };
   },
@@ -2682,6 +2678,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -39265,7 +39263,10 @@ var render = function() {
                 staticClass: "fa fa-list-ul",
                 attrs: { "aria-hidden": "true" }
               }),
-              _vm._v("\n                    Flows\n                ")
+              _vm._v(" "),
+              _c("span", { staticClass: "settings-button-text" }, [
+                _vm._v("Flows")
+              ])
             ]
           ),
           _vm._v(" "),
@@ -39277,7 +39278,10 @@ var render = function() {
               on: { click: _vm.closeSettings }
             },
             [
-              _vm._v("\n                    Close\n                    "),
+              _c("span", { staticClass: "settings-button-text" }, [
+                _vm._v("Close")
+              ]),
+              _vm._v(" "),
               _c("i", {
                 staticClass: "fa fa-times",
                 attrs: { "aria-hidden": "true" }
@@ -39321,7 +39325,7 @@ var render = function() {
                 staticClass: "fa fa-plus",
                 attrs: { "aria-hidden": "true" }
               }),
-              _vm._v("\n                    Add task\n                ")
+              _vm._v("\n                Add task\n            ")
             ]
           ),
           _vm._v(" "),
@@ -39330,9 +39334,7 @@ var render = function() {
               staticClass: "fa fa-crosshairs",
               attrs: { "aria-hidden": "true" }
             }),
-            _vm._v(
-              "\n                    Focus playlist\n                    "
-            ),
+            _vm._v("\n                Focus playlist\n                "),
             _c("i", {
               staticClass: "fa fa-music",
               attrs: { "aria-hidden": "true" }
@@ -39344,9 +39346,7 @@ var render = function() {
               staticClass: "fa fa-coffee",
               attrs: { "aria-hidden": "true" }
             }),
-            _vm._v(
-              "\n                    Break playlist\n                    "
-            ),
+            _vm._v("\n                Break playlist\n                "),
             _c("i", {
               staticClass: "fa fa-music",
               attrs: { "aria-hidden": "true" }
@@ -39358,9 +39358,7 @@ var render = function() {
               staticClass: "fa fa-volume-up",
               attrs: { "aria-hidden": "true" }
             }),
-            _vm._v(
-              "\n                    Now Playing ...\n                    "
-            ),
+            _vm._v("\n                Now Playing ...\n                "),
             _vm._v(" "),
             _c("input", {
               staticClass: "volume-input",
@@ -39396,36 +39394,46 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "task settings-card" }, [
+    _c("div", { staticClass: "task-header" }, [
+      _c("span", [
+        _vm.task.type === "break"
+          ? _c("i", {
+              staticClass: "fa fa-coffee",
+              attrs: { "aria-hidden": "true" }
+            })
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.task.type === "focus"
+          ? _c("i", {
+              staticClass: "fa fa-crosshairs",
+              attrs: { "aria-hidden": "true" }
+            })
+          : _vm._e(),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "task-title",
+          attrs: { contenteditable: "true" },
+          domProps: { textContent: _vm._s(_vm.task.title) },
+          on: { blur: _vm.changeTitle }
+        })
+      ]),
+      _vm._v(" "),
+      _vm._m(0)
+    ]),
+    _vm._v(" "),
     _c(
       "div",
       { staticClass: "task-content" },
       [
-        _c("div", { staticClass: "task-header" }, [
-          _vm.task.type === "break"
-            ? _c("i", {
-                staticClass: "fa fa-coffee",
-                attrs: { "aria-hidden": "true" }
-              })
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.task.type === "focus"
-            ? _c("i", {
-                staticClass: "fa fa-crosshairs",
-                attrs: { "aria-hidden": "true" }
-              })
-            : _vm._e(),
-          _vm._v(" "),
-          _c("span", {
-            staticClass: "task-title",
-            attrs: { contenteditable: "true" },
-            domProps: { textContent: _vm._s(_vm.task.title) },
-            on: { blur: _vm.changeTitle }
-          })
-        ]),
+        _c("TimeView", {
+          staticClass: "task-times",
+          attrs: { time: _vm.task.view }
+        }),
         _vm._v(" "),
-        _c("TimeView", { attrs: { time: _vm.task.view } }),
-        _vm._v(" "),
-        _c("TimeView", { attrs: { time: _vm.timeFormat } }),
+        _c("TimeView", {
+          staticClass: "time-labels",
+          attrs: { time: _vm.timeFormat }
+        }),
         _vm._v(" "),
         _c("input", {
           directives: [
@@ -39508,7 +39516,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "button",
+        staticClass: "button task-delete",
         on: {
           click: function($event) {
             return _vm.removeTask(_vm.task.id)
@@ -39520,12 +39528,24 @@ var render = function() {
           staticClass: "fa fa-trash",
           attrs: { "aria-hidden": "true" }
         }),
-        _vm._v("\n            Delete task\n        ")
+        _vm._v(" "),
+        _c("span", { staticClass: "settings-button-text" }, [
+          _vm._v("Delete task")
+        ])
       ]
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [
+      _c("i", { staticClass: "fa fa-bars", attrs: { "aria-hidden": "true" } })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -39742,12 +39762,12 @@ var render = function() {
       staticClass: "time-hours",
       domProps: { textContent: _vm._s(_vm.time.hours) }
     }),
-    _vm._v(":"),
+    _vm._v(" "),
     _c("span", {
       staticClass: "time-minutes",
       domProps: { textContent: _vm._s(_vm.time.minutes) }
     }),
-    _vm._v(":"),
+    _vm._v(" "),
     _c("span", {
       staticClass: "time-seconds",
       domProps: { textContent: _vm._s(_vm.time.seconds) }

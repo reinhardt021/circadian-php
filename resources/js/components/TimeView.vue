@@ -3,10 +3,12 @@
         <span
             class="time-hours"
             v-text="time.hours"
-        ></span>:<span
+        ></span>
+        <span
             class="time-minutes"
             v-text="time.minutes"
-        ></span>:<span
+        ></span>
+        <span
             class="time-seconds"
             v-text="time.seconds"
         ></span>
