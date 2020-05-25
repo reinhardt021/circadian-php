@@ -51,7 +51,11 @@
                     'break': 'focus',
                     'focus': 'break',
                 };
-                this.task.type = taskTypeMap[this.task.type];
+                const newTask = {
+                    ...this.task,
+                    type: taskTypeMap[this.task.type]
+                }
+                this.$emit('change-task', newTask);
             },
             changeTime(e) {
                 const { dataset:{ type }, value } = e.target;
