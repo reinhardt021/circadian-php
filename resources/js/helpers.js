@@ -17,6 +17,7 @@ function formatTime(hours, minutes, seconds) {
 function updateCurrentTask(currentTask, updatedTask) {
     currentTask.id = updatedTask.id;
     currentTask.title = updatedTask.title;
+    currentTask.type = updatedTask.type;
     currentTask.hours = updatedTask.hours;
     currentTask.minutes = updatedTask.minutes;
     currentTask.seconds = updatedTask.seconds;

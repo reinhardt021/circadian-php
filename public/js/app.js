@@ -1986,6 +1986,7 @@ var FlowRepository = _repositories_RepositoryFactory_js__WEBPACK_IMPORTED_MODULE
 
 var templateTask = {
   title: 'New Task',
+  type: 'break',
   hours: 0,
   minutes: 0,
   seconds: 0,
@@ -1997,6 +1998,7 @@ var templateTask = {
 var task01 = {
   id: 21,
   title: 'Warm Up',
+  type: 'break',
   hours: 0,
   minutes: 0,
   seconds: 30,
@@ -2005,6 +2007,7 @@ var task01 = {
 var task02 = {
   id: 11,
   title: 'WORK',
+  type: 'focus',
   hours: 0,
   minutes: 25,
   seconds: 0,
@@ -2013,6 +2016,7 @@ var task02 = {
 var task03 = {
   id: 31,
   title: 'Break',
+  type: 'break',
   hours: 0,
   minutes: 13,
   seconds: 0,
@@ -2397,6 +2401,35 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2423,6 +2456,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     closeSettings: function closeSettings() {
       this.$emit('close-settings');
+    },
+    changeVolume: function changeVolume() {
+      console.log('>>> volume change');
     }
   },
   components: {
@@ -2451,6 +2487,14 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -39211,150 +39255,121 @@ var render = function() {
     "transition",
     { attrs: { name: "settings", "enter-active-class": "settings-show" } },
     [
-      _c(
-        "div",
-        { staticClass: "settings" },
-        [
+      _c("div", { staticClass: "settings" }, [
+        _c("div", { staticClass: "settings-header" }, [
+          _c(
+            "button",
+            { staticClass: "settings-button", attrs: { id: "settings-flows" } },
+            [
+              _c("i", {
+                staticClass: "fa fa-list-ul",
+                attrs: { "aria-hidden": "true" }
+              }),
+              _vm._v("\n                    Flows\n                ")
+            ]
+          ),
+          _vm._v(" "),
           _c(
             "button",
             {
-              staticClass: "button",
+              staticClass: "settings-button",
               attrs: { id: "settings-close" },
               on: { click: _vm.closeSettings }
             },
             [
-              _c(
-                "svg",
-                {
-                  attrs: {
-                    width: "14",
-                    height: "14",
-                    xmlns: "http://www.w3.org/2000/svg"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      fill: "#333",
-                      "fill-rule": "evenodd",
-                      d:
-                        "M5.586 7L.636 2.05A1 1 0 0 1 2.05.636L7 5.586l4.95-4.95a1 1 0 0 1 1.414 1.414L8.414 7l4.95 4.95a1 1 0 0 1-1.414 1.414L7 8.414l-4.95 4.95A1 1 0 0 1 .636 11.95L5.586 7z"
-                    }
-                  })
-                ]
-              )
+              _vm._v("\n                    Close\n                    "),
+              _c("i", {
+                staticClass: "fa fa-times",
+                attrs: { "aria-hidden": "true" }
+              })
             ]
-          ),
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "settings-content" }, [
+          _c("h2", {
+            staticClass: "flow-title",
+            domProps: { textContent: _vm._s(_vm.currentFlow.title) }
+          }),
           _vm._v(" "),
           _c(
-            "button",
+            "div",
+            { staticClass: "tasks" },
+            _vm._l(_vm.settings.taskOrder, function(taskId, index) {
+              return _c("AppTask", {
+                key: taskId,
+                attrs: { task: _vm.tasks[taskId], index: index },
+                on: {
+                  "change-task": _vm.taskChange,
+                  "remove-task": _vm.taskRemove
+                }
+              })
+            }),
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "settings-options" }, [
+          _c(
+            "div",
             {
-              staticClass: "button",
-              attrs: { id: "settings-volume" },
-              on: { click: function($event) {} }
+              staticClass: "settings-card settings-button",
+              on: { click: _vm.taskAdd }
             },
             [
-              _c(
-                "svg",
-                {
-                  attrs: {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    version: "1.0",
-                    width: "24",
-                    height: "22",
-                    viewBox: "0 0 75 75"
-                  }
-                },
-                [
-                  _c("path", {
-                    staticStyle: {
-                      stroke: "#111",
-                      "stroke-width": "5",
-                      "stroke-linejoin": "round",
-                      fill: "#111"
-                    },
-                    attrs: {
-                      d:
-                        "M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("path", {
-                    staticStyle: {
-                      fill: "none",
-                      stroke: "#111",
-                      "stroke-width": "5",
-                      "stroke-linecap": "round"
-                    },
-                    attrs: {
-                      d:
-                        "M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6"
-                    }
-                  })
-                ]
-              )
+              _c("i", {
+                staticClass: "fa fa-plus",
+                attrs: { "aria-hidden": "true" }
+              }),
+              _vm._v("\n                    Add task\n                ")
             ]
           ),
           _vm._v(" "),
-          _c("FlowDetails"),
-          _vm._v(" "),
-          _c("div", { staticClass: "flow" }, [
-            _c("h2", {
-              staticClass: "flow-title",
-              domProps: { textContent: _vm._s(_vm.currentFlow.title) }
+          _c("div", { staticClass: "settings-card" }, [
+            _c("i", {
+              staticClass: "fa fa-crosshairs",
+              attrs: { "aria-hidden": "true" }
             }),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "tasks" },
-              _vm._l(_vm.settings.taskOrder, function(taskId, index) {
-                return _c("AppTask", {
-                  key: taskId,
-                  attrs: { task: _vm.tasks[taskId], index: index },
-                  on: {
-                    "change-task": _vm.taskChange,
-                    "remove-task": _vm.taskRemove
-                  }
-                })
-              }),
-              1
-            )
+            _vm._v(
+              "\n                    Focus playlist\n                    "
+            ),
+            _c("i", {
+              staticClass: "fa fa-music",
+              attrs: { "aria-hidden": "true" }
+            })
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "options" }, [
-            _c(
-              "button",
-              {
-                staticClass: "button settings-btn",
-                on: { click: _vm.taskAdd }
-              },
-              [
-                _c(
-                  "svg",
-                  {
-                    attrs: {
-                      width: "24",
-                      height: "22",
-                      xmlns: "http://www.w3.org/2000/svg"
-                    }
-                  },
-                  [
-                    _c("path", {
-                      attrs: {
-                        fill: "#333",
-                        "fill-rule": "evenodd",
-                        d:
-                          "M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z"
-                      }
-                    })
-                  ]
-                )
-              ]
-            )
+          _c("div", { staticClass: "settings-card" }, [
+            _c("i", {
+              staticClass: "fa fa-coffee",
+              attrs: { "aria-hidden": "true" }
+            }),
+            _vm._v(
+              "\n                    Break playlist\n                    "
+            ),
+            _c("i", {
+              staticClass: "fa fa-music",
+              attrs: { "aria-hidden": "true" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "settings-card" }, [
+            _c("i", {
+              staticClass: "fa fa-volume-up",
+              attrs: { "aria-hidden": "true" }
+            }),
+            _vm._v(
+              "\n                    Now Playing ...\n                    "
+            ),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "volume-input",
+              attrs: { type: "range", min: "0", max: "100" },
+              on: { input: _vm.changeVolume }
+            })
           ])
-        ],
-        1
-      )
+        ])
+      ])
     ]
   )
 }
@@ -39380,51 +39395,33 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "task" }, [
-    _c(
-      "button",
-      {
-        staticClass: "button remove-task",
-        on: {
-          click: function($event) {
-            return _vm.removeTask(_vm.task.id)
-          }
-        }
-      },
-      [
-        _c(
-          "svg",
-          {
-            attrs: {
-              width: "14",
-              height: "14",
-              xmlns: "http://www.w3.org/2000/svg"
-            }
-          },
-          [
-            _c("path", {
-              attrs: {
-                fill: "grey",
-                "fill-rule": "evenodd",
-                d:
-                  "M5.586 7L.636 2.05A1 1 0 0 1 2.05.636L7 5.586l4.95-4.95a1 1 0 0 1 1.414 1.414L8.414 7l4.95 4.95a1 1 0 0 1-1.414 1.414L7 8.414l-4.95 4.95A1 1 0 0 1 .636 11.95L5.586 7z"
-              }
-            })
-          ]
-        )
-      ]
-    ),
-    _vm._v(" "),
+  return _c("div", { staticClass: "task settings-card" }, [
     _c(
       "div",
       { staticClass: "task-content" },
       [
-        _c("div", {
-          staticClass: "task-title",
-          attrs: { contenteditable: "true" },
-          domProps: { textContent: _vm._s(_vm.task.title) },
-          on: { blur: _vm.changeTitle }
-        }),
+        _c("div", { staticClass: "task-header" }, [
+          _vm.task.type === "break"
+            ? _c("i", {
+                staticClass: "fa fa-coffee",
+                attrs: { "aria-hidden": "true" }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.task.type === "focus"
+            ? _c("i", {
+                staticClass: "fa fa-crosshairs",
+                attrs: { "aria-hidden": "true" }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _c("span", {
+            staticClass: "task-title",
+            attrs: { contenteditable: "true" },
+            domProps: { textContent: _vm._s(_vm.task.title) },
+            on: { blur: _vm.changeTitle }
+          })
+        ]),
         _vm._v(" "),
         _c("TimeView", { attrs: { time: _vm.task.view } }),
         _vm._v(" "),
@@ -39506,6 +39503,25 @@ var render = function() {
         })
       ],
       1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "button",
+        on: {
+          click: function($event) {
+            return _vm.removeTask(_vm.task.id)
+          }
+        }
+      },
+      [
+        _c("i", {
+          staticClass: "fa fa-trash",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v("\n            Delete task\n        ")
+      ]
     )
   ])
 }
@@ -52710,6 +52726,7 @@ function formatTime(hours, minutes, seconds) {
 function updateCurrentTask(currentTask, updatedTask) {
   currentTask.id = updatedTask.id;
   currentTask.title = updatedTask.title;
+  currentTask.type = updatedTask.type;
   currentTask.hours = updatedTask.hours;
   currentTask.minutes = updatedTask.minutes;
   currentTask.seconds = updatedTask.seconds;

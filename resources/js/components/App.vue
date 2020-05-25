@@ -43,6 +43,7 @@
 
     const templateTask = {
         title: 'New Task',
+        type: 'break',
         hours: 0,
         minutes: 0,
         seconds: 0,
@@ -55,6 +56,7 @@
     const task01 = {
         id: 21,
         title: 'Warm Up',
+        type: 'break',
         hours: 0,
         minutes: 0,
         seconds: 30,
@@ -63,6 +65,7 @@
     const task02 = {
         id: 11,
         title: 'WORK',
+        type: 'focus',
         hours: 0,
         minutes: 25,
         seconds: 0,
@@ -71,6 +74,7 @@
     const task03 = {
         id: 31,
         title: 'Break',
+        type: 'break',
         hours: 0,
         minutes: 13,
         seconds: 0,
