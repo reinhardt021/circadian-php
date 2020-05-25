@@ -42,12 +42,12 @@
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Add task
                 </div>
-                <div class="settings-card">
+                <div class="settings-card settings-button" @click="setPlaylist('focus')">
                     <i class="fa fa-crosshairs" aria-hidden="true"></i>
                     Focus playlist
                     <i class="fa fa-music" aria-hidden="true"></i>
                 </div>
-                <div class="settings-card">
+                <div class="settings-card settings-button" @click="setPlaylist('break')">
                     <i class="fa fa-coffee" aria-hidden="true"></i>
                     Break playlist
                     <i class="fa fa-music" aria-hidden="true"></i>
@@ -95,6 +95,9 @@
             },
             closeSettings() {
                 this.$emit('close-settings');
+            },
+            setPlaylist(type) {
+                console.log('>>> setPlaylist type=' + type);
             },
             changeVolume() {
                 console.log('>>> volume change');

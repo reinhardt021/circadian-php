@@ -2453,6 +2453,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     closeSettings: function closeSettings() {
       this.$emit('close-settings');
     },
+    setPlaylist: function setPlaylist(type) {
+      console.log('>>> setPlaylist type=' + type);
+    },
     changeVolume: function changeVolume() {
       console.log('>>> volume change');
     }
@@ -39329,29 +39332,51 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "settings-card" }, [
-            _c("i", {
-              staticClass: "fa fa-crosshairs",
-              attrs: { "aria-hidden": "true" }
-            }),
-            _vm._v("\n                Focus playlist\n                "),
-            _c("i", {
-              staticClass: "fa fa-music",
-              attrs: { "aria-hidden": "true" }
-            })
-          ]),
+          _c(
+            "div",
+            {
+              staticClass: "settings-card settings-button",
+              on: {
+                click: function($event) {
+                  return _vm.setPlaylist("focus")
+                }
+              }
+            },
+            [
+              _c("i", {
+                staticClass: "fa fa-crosshairs",
+                attrs: { "aria-hidden": "true" }
+              }),
+              _vm._v("\n                Focus playlist\n                "),
+              _c("i", {
+                staticClass: "fa fa-music",
+                attrs: { "aria-hidden": "true" }
+              })
+            ]
+          ),
           _vm._v(" "),
-          _c("div", { staticClass: "settings-card" }, [
-            _c("i", {
-              staticClass: "fa fa-coffee",
-              attrs: { "aria-hidden": "true" }
-            }),
-            _vm._v("\n                Break playlist\n                "),
-            _c("i", {
-              staticClass: "fa fa-music",
-              attrs: { "aria-hidden": "true" }
-            })
-          ]),
+          _c(
+            "div",
+            {
+              staticClass: "settings-card settings-button",
+              on: {
+                click: function($event) {
+                  return _vm.setPlaylist("break")
+                }
+              }
+            },
+            [
+              _c("i", {
+                staticClass: "fa fa-coffee",
+                attrs: { "aria-hidden": "true" }
+              }),
+              _vm._v("\n                Break playlist\n                "),
+              _c("i", {
+                staticClass: "fa fa-music",
+                attrs: { "aria-hidden": "true" }
+              })
+            ]
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "settings-card" }, [
             _c("i", {
