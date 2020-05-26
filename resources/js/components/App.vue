@@ -87,7 +87,7 @@
         // todo: move this to UserTimerSettings
         currentFlow: {
             id: 13,
-            title: 'Mein Flow'
+            title: 'Pomodoro Flow'
         },
 
         // todo: move this to UserTimerSettings
@@ -204,27 +204,27 @@
 
     export default {
         data: function () {
-            //todo: findout proper styling for this to be consistent
+            //todo: find out proper styling for this to be consistent
             return appState;
         },
-        created() {
-            this.fetch();
-        },
+        // created() {
+        //     this.fetch();
+        // },
         methods: {
-            async fetch () {
-                const { data } = await FlowRepository.get(true, true);
+            // async fetch () {
+                // const { data } = await FlowRepository.get(true, true);
 
                 // can probably do without this if given typehinting >> todo: typescript
-                if (data.hasOwnProperty('data') && Array.isArray(data.data)) {
-                    const userFlows = data.data.reduce(function (flows, flow) {
-                        flows[flow.id] = flow;
-
-                        return flows;
-                    }, {});
-
-                    this.flows = userFlows;
-                }
-            },
+                // if (data.hasOwnProperty('data') && Array.isArray(data.data)) {
+                //     const userFlows = data.data.reduce(function (flows, flow) {
+                //         flows[flow.id] = flow;
+                //
+                //         return flows;
+                //     }, {});
+                //
+                //     this.flows = userFlows;
+                // }
+            // },
             toggleTimer() {
                 const self = this;
 
