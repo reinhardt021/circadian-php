@@ -16,3 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResource('flows', 'API\FlowController');
+Route::apiResource('flows/{flow}/tasks', 'API\TaskController');

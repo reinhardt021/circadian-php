@@ -1,3 +1,67 @@
+# Circadian
+
+Interval Training app
+* Built with Laravel
+
+## Setup
+
+### Create Database
+```
+$ vagrant ssh
+$ cd my project
+$ mysql
+
+# see a list of databases
+> show databases;
+
+# select a database in interact with
+> use <database-name>;
+
+# to see the tables in the database
+> show tables;
+
+# create database for testing
+> CREATE database testing;
+
+# to exit mysql
+> exit
+```
+
+### Create .env files
+```
+# create .env file
+$ cp .env.example .env
+
+# go & update .env file with database credentials
+# *this is an ESSENTIAL part*
+$ vi .env
+
+# create .env.testing file
+# this is needed to run phpunit 
+# without damaging main DB
+$ cp .env .env.testing
+
+# go & update .env file with database credentials
+$ vi .env.testing
+> DB_DATABASE=testing
+```
+
+### Run migrations on Databases
+```
+# run migrations on DB for updated tables
+$ php artisan migrate
+
+# run migrations on Test DB
+$ php artisan migrate --env=testing
+
+```
+
+End of Circadian Setup.
+
+---
+
+
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
